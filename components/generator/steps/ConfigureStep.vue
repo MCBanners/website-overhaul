@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { getTemplateKey } from "~/utils/templates";
-import { generateImageUrl } from "~/utils/banner";
-import { TemplateMapping } from "~/types/misc";
 import { storeToRefs } from "pinia";
 import { useBannerDetailsStore } from "~/stores/bannerDetails";
 import BackgroundSection from "~/components/generator/sections/BackgroundSection.vue";
 import LogoSection from "~/components/generator/sections/LogoSection.vue";
+import ResourceNameSection from "../sections/ResourceNameSection.vue";
 
 const store = useBannerDetailsStore();
 const { logoSize, logoXOffset, selectedTemplate, bannerId } =
@@ -87,6 +85,12 @@ export default {
         </div>
         <div v-if="item.key === 'resourceLogo'" class="space-y-3">
           <LogoSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'resourceName'" class="space-y-3">
+          <ResourceNameSection
+            :label="item.label"
+            :description="item.description"
+          />
         </div>
       </div>
     </template>

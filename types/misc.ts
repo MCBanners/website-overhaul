@@ -1,4 +1,4 @@
-export type TemplateMapping = {
+export type KeyValueMapping = {
   key: string;
   value: string;
 };

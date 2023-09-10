@@ -10,15 +10,33 @@ defineProps({
 const store = useBannerDetailsStore();
 const templates = await getTemplates();
 
-const { logoSize, logoXOffset, selectedTemplate, bannerId } =
-  storeToRefs(store);
+const {
+  logoSize,
+  logoXOffset,
+  selectedTemplate,
+  bannerId,
+  rXOffset,
+  rYOffset,
+  rFontSize,
+  rFontBold,
+  rTextAlignment,
+  rFontFace,
+  rTextOverride,
+} = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
   return generateImageUrl(
     Number(bannerId.value),
     getTemplateKey(selectedTemplate.value, templates)!,
     logoSize.value,
-    logoXOffset.value
+    logoXOffset.value,
+    rXOffset.value,
+    rYOffset.value,
+    rFontSize.value,
+    rFontBold.value,
+    rTextAlignment.value,
+    rFontFace.value,
+    rTextOverride.value,
   );
 });
 </script>

@@ -1,12 +1,32 @@
 import { SVC } from "~/types/svc";
-import { TemplateMapping } from "~/types/misc";
+import { KeyValueMapping } from "~/types/misc";
 
-export async function getTemplates(): Promise<TemplateMapping[]> {
-  const templates = await fetch(
+export async function getConstants(): Promise<SVC> {
+  const constants = await fetch(
     "https://api.mcbanners.com/banner/svc/constants"
   );
-  const templatesJson = (await templates.json()) as SVC;
-  const mapped: TemplateMapping[] = Object.entries(templatesJson.templates).map(
+  return (await constants.json()) as SVC;
+}
+
+export async function getTemplates(): Promise<KeyValueMapping[]> {
+  const constants = await getConstants();
+  const mapped: KeyValueMapping[] = Object.entries(constants.templates).map(
+    ([key, value]) => ({ key, value })
+  );
+  return mapped;
+}
+
+export async function getAlignments(): Promise<KeyValueMapping[]> {
+  const constants = await getConstants();
+  const mapped: KeyValueMapping[] = Object.entries(
+    constants.text_alignments
+  ).map(([key, value]) => ({ key, value }));
+  return mapped;
+}
+
+export async function getFontFaces(): Promise<KeyValueMapping[]> {
+  const constants = await getConstants();
+  const mapped: KeyValueMapping[] = Object.entries(constants.fonts).map(
     ([key, value]) => ({ key, value })
   );
   return mapped;
@@ -14,7 +34,7 @@ export async function getTemplates(): Promise<TemplateMapping[]> {
 
 export function getTemplateKey(
   source: string,
-  templates: TemplateMapping[]
+  templates: KeyValueMapping[]
 ): string | undefined {
   return templates.find((template) => template.value === source)?.key;
 }
