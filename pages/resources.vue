@@ -28,26 +28,32 @@ const platforms = [
   {
     key: "spigot",
     value: "Spigot",
+    type: "SPIGOT_RESOURCE",
   },
   {
     key: "sponge",
     value: "Sponge",
+    type: "SPONGE_RESOURCE",
   },
   {
     key: "curseforge",
     value: "CurseForge",
+    type: "CURSEFORGE_RESOURCE",
   },
   {
     key: "modrinth",
     value: "Modrinth",
+    type: "MODRINTH_RESOURCE",
   },
   {
     key: "builtbybit",
     value: "BuiltByBit",
+    type: "BUILTBYBIT_RESOURCE",
   },
   {
     key: "polymart",
     value: "Polymart",
+    type: "POLYMART_RESOURCE",
   },
 ];
 
@@ -61,6 +67,10 @@ const mnemonic = ref("");
 
 function getPlatformKey(value: string) {
   return platforms.find((platform) => platform.value === value)?.key;
+}
+
+function getPlatformType(value: string) {
+  return platforms.find((platform) => platform.value === value)?.type;
 }
 
 function copyToClipboard() {
@@ -158,7 +168,7 @@ async function onSubmit(form: any) {
           <div v-else>
             <UButton
               type="submit"
-              @click="() => save('SPIGOT_RESOURCE')"
+              @click="() => save(getPlatformType(idForm.platform)!)"
               variant="outline"
             >
               Submit
