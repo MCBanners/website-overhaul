@@ -6,15 +6,8 @@ import FormInput from "~/components/generator/types/raw/FormInput.vue";
 
 const store = useBannerDetailsStore();
 const constants = useConstantStore();
-const {
-  rXOffset,
-  rYOffset,
-  rFontSize,
-  rFontBold,
-  rTextAlignment,
-  rFontFace,
-  rTextOverride,
-} = storeToRefs(store);
+const { aXOffset, aYOffset, aFontSize, aFontBold, aTextAlignment, aFontFace } =
+  storeToRefs(store);
 
 const alignments = constants.alignments;
 const fonts = constants.fontFaces;
@@ -22,14 +15,14 @@ const fonts = constants.fontFaces;
 
 <script lang="ts">
 export default {
-  name: "ResourceNameControls",
+  name: "AuthorNameControls",
 };
 </script>
 
 <template>
   <div class="flex flex-row mb-4 w-full">
     <FormInput
-      v-model="rXOffset"
+      v-model="aXOffset"
       name="xoffset"
       label="X Offset"
       type="number"
@@ -37,7 +30,7 @@ export default {
       trailText="px"
     />
     <FormInput
-      v-model="rYOffset"
+      v-model="aYOffset"
       name="yoffset"
       label="Y Offset"
       type="number"
@@ -45,7 +38,7 @@ export default {
       trailText="px"
     />
     <FormInput
-      v-model="rFontSize"
+      v-model="aFontSize"
       name="fontsize"
       label="Font Size"
       type="number"
@@ -53,22 +46,19 @@ export default {
       trailText="px"
     />
     <UFormGroup label="Bold" name="bold">
-      <UToggle v-model="rFontBold" />
+      <UToggle v-model="aFontBold" />
     </UFormGroup>
   </div>
   <div class="flex flex-row space-x-4">
     <UFormGroup label="Text Alignment" name="alignment">
       <USelect
-        v-model="rTextAlignment"
+        v-model="aTextAlignment"
         :options="alignments"
         option-attribute="value"
       />
     </UFormGroup>
     <UFormGroup label="Font Face" name="font">
-      <USelect v-model="rFontFace" :options="fonts" option-attribute="value" />
-    </UFormGroup>
-    <UFormGroup label="Text Override" name="override">
-      <UInput v-model="rTextOverride" type="text" class="w-full" />
+      <USelect v-model="aFontFace" :options="fonts" option-attribute="value" />
     </UFormGroup>
   </div>
 </template>

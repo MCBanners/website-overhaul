@@ -4,10 +4,10 @@ import { useBannerDetailsStore } from "~/stores/bannerDetails";
 import BackgroundSection from "~/components/generator/sections/BackgroundSection.vue";
 import LogoSection from "~/components/generator/sections/LogoSection.vue";
 import ResourceNameSection from "../sections/ResourceNameSection.vue";
+import AuthorNameSection from "../sections/AuthorNameSection.vue";
 
 const store = useBannerDetailsStore();
-const { logoSize, logoXOffset, selectedTemplate, bannerId } =
-  storeToRefs(store);
+const { logoSize, selectedTemplate, bannerId } = storeToRefs(store);
 
 const configureItems = [
   {
@@ -88,6 +88,12 @@ export default {
         </div>
         <div v-if="item.key === 'resourceName'" class="space-y-3">
           <ResourceNameSection
+            :label="item.label"
+            :description="item.description"
+          />
+        </div>
+        <div v-if="item.key === 'authorName'" class="space-y-3">
+          <AuthorNameSection
             :label="item.label"
             :description="item.description"
           />

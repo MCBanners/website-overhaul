@@ -25,6 +25,12 @@ const {
   rFontFace,
   rTextOverride,
   bannerPlatform,
+  aXOffset,
+  aYOffset,
+  aFontSize,
+  aFontBold,
+  aTextAlignment,
+  aFontFace,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
@@ -40,7 +46,13 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     rFontBold.value,
     rTextAlignment.value,
     rFontFace.value,
-    rTextOverride.value
+    rTextOverride.value,
+    aXOffset.value,
+    aYOffset.value,
+    aFontSize.value,
+    aFontBold.value,
+    aTextAlignment.value,
+    aFontFace.value
   );
 });
 </script>
