@@ -48,7 +48,6 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     </template>
     <img
       :alt="label"
-      :key="computedImageUrl"
       :src="computedImageUrl"
       width="300"
       height="100"
