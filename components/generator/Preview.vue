@@ -24,11 +24,13 @@ const {
   rTextAlignment,
   rFontFace,
   rTextOverride,
+  bannerPlatform,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
   return generateImageUrl(
-    Number(bannerId.value),
+    bannerId.value,
+    bannerPlatform.value,
     getTemplateKey(selectedTemplate.value, templates)!,
     logoSize.value,
     logoXOffset.value,

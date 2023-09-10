@@ -13,17 +13,17 @@ const configureItems = [
   {
     key: "background",
     label: "Background",
-    description: "Change the background of your banner.",
+    description: "Background Configuration",
   },
   {
     key: "resourceLogo",
     label: "Resource Logo",
-    description: "Change the resource logo of your banner.",
+    description: "Logo Configuration",
   },
   {
     key: "resourceName",
     label: "Resource Name",
-    description: "Change the resource name of your banner.",
+    description: "Name Configuration",
   },
   {
     key: "authorName",

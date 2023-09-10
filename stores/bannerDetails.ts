@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useBannerDetailsStore = defineStore("bannerDetails", () => {
-  const bannerId = ref(0);
+  const bannerId = ref("0");
   const logoSize = ref(80);
   const logoXOffset = ref(12);
   const selectedTemplate = ref("Moonlight Purple");
@@ -13,6 +13,8 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const rTextAlignment = ref("Left");
   const rFontFace = ref("Source Sans Pro");
   const rTextOverride = ref("");
+
+  const bannerPlatform = ref("spigot");
 
   return {
     bannerId,
@@ -26,5 +28,6 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
     rTextAlignment,
     rFontFace,
     rTextOverride,
+    bannerPlatform
   };
 });

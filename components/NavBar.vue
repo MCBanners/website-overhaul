@@ -8,8 +8,8 @@
               <NuxtLink to="/">
                 <h5 class="font-bold mb-0 ml-4">Home</h5>
               </NuxtLink>
-              <NuxtLink to="/spigot">
-                <h5 class="font-bold mb-0 ml-4">Spigot</h5>
+              <NuxtLink to="/resources">
+                <h5 class="font-bold mb-0 ml-4">Resource Banners</h5>
               </NuxtLink>
               <!-- <NuxtLink to="/sponge">
                 <h5 class="font-bold mb-0 ml-4">Sponge</h5>
