@@ -1,0 +1,40 @@
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useBannerDetailsStore } from "~/stores/bannerDetails";
+
+defineProps({
+  label: String,
+  description: String,
+});
+
+const store = useBannerDetailsStore();
+const templates = await getTemplates();
+
+const { logoSize, logoXOffset, selectedTemplate, bannerId } =
+  storeToRefs(store);
+
+const computedImageUrl: ComputedRef<string> = computed(() => {
+  return generateImageUrl(
+    Number(bannerId.value),
+    getTemplateKey(selectedTemplate.value, templates)!,
+    logoSize.value,
+    logoXOffset.value
+  );
+});
+</script>
+
+<template>
+  <UCard class="w-1/3">
+    <template #header>
+      <h1 class="text-center font-bold">Preview</h1>
+    </template>
+    <img
+      :alt="label"
+      :key="computedImageUrl"
+      :src="computedImageUrl"
+      width="300"
+      height="100"
+      class="rounded-lg"
+    />
+  </UCard>
+</template>
