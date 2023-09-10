@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { BannerSaveResponse } from "~/types/misc";
 
 export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const bannerId = ref("0");
@@ -26,6 +27,48 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const aTextAlignment = ref("Left");
   const aFontFace = ref("Source Sans Pro");
 
+  async function saveBanner(type: string): Promise<BannerSaveResponse> {
+    const data = {
+      type: type,
+      metadata: {
+        resource_id: bannerId.value,
+      },
+      settings: {
+        background__template: selectedTemplate.value,
+        logo__size: logoSize.value,
+        logo__x: logoXOffset.value,
+        resource_name__x: rXOffset.value,
+        resource_name__y: rYOffset.value,
+        resource_name__font_size: rFontSize.value,
+        resource_name__font_bold: rFontBold.value,
+        resource_name__text_align: rTextAlignment.value,
+        resource_name__font_face: rFontFace.value,
+        resource_name__display: rTextOverride.value,
+        author_name__x: aXOffset.value,
+        author_name__y: aYOffset.value,
+        author_name__font_size: aFontSize.value,
+        author_name__font_bold: aFontBold.value,
+        author_name__text_align: aTextAlignment.value,
+        author_name__font_face: aFontFace.value,
+      },
+    };
+
+    const response = await fetch(
+      "https://api.mcbanners.com/banner/saved/save",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const responseJson = (await response.json()) as BannerSaveResponse;
+
+    return responseJson;
+  }
+
   return {
     bannerId,
     logoSize,
@@ -45,5 +88,6 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
     aFontBold,
     aTextAlignment,
     aFontFace,
+    saveBanner,
   };
 });

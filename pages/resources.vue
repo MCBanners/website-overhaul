@@ -56,9 +56,34 @@ const index = ref(0);
 
 const toast = useToast();
 
+const isOpen = ref(false);
+const mnemonic = ref("");
+
 function getPlatformKey(value: string) {
   return platforms.find((platform) => platform.value === value)?.key;
 }
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(computedResultUrl.value);
+  toast.add({
+    id: "copied",
+    title: "Copied!",
+    description: "The URL has been copied to your clipboard.",
+    timeout: 3000,
+  });
+}
+
+async function save(type: string) {
+  const saved = await store.saveBanner(type);
+  if (saved.mnemonic) {
+    mnemonic.value = saved.mnemonic;
+    isOpen.value = true;
+  }
+}
+
+const computedResultUrl: ComputedRef<string> = computed(() => {
+  return `https://api.mcbanners.com/banner/saved/${mnemonic.value}.png`;
+});
 
 async function onSubmit(form: any) {
   const id = form.id;
@@ -88,7 +113,11 @@ async function onSubmit(form: any) {
 <template>
   <UTabs :items="items" class="w-1/2 mx-auto mt-12" :model-value="index">
     <template #item="{ item }">
-      <UCard @submit.prevent="() => onSubmit(idForm)">
+      <UCard
+        @submit.prevent="
+          () => onSubmit(item.key === 'details' ? idForm : idForm)
+        "
+      >
         <template #header>
           <h3
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
@@ -123,7 +152,75 @@ async function onSubmit(form: any) {
           <ConfigureStep />
         </div>
         <template #footer>
-          <UButton type="submit" color="black"> Fetch </UButton>
+          <div v-if="item.key === 'details'">
+            <UButton type="submit" variant="outline"> Fetch </UButton>
+          </div>
+          <div v-else>
+            <UButton
+              type="submit"
+              @click="() => save('SPIGOT_RESOURCE')"
+              variant="outline"
+            >
+              Submit
+            </UButton>
+          </div>
+          <UModal v-model="isOpen">
+            <UCard
+              :ui="{
+                divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+              }"
+            >
+              <template #header>
+                <h1 class="text-xl font-semibold">
+                  Your banner was successfully saved!
+                </h1>
+              </template>
+              <!-- Content -->
+              <img
+                :alt="`Banner for ${bannerId.value}`"
+                :src="computedResultUrl"
+                width="300"
+                height="100"
+                class="rounded-lg mx-auto"
+              />
+              <UInput
+                v-model="computedResultUrl"
+                readonly
+                class="mt-4 text-center"
+              />
+              <div class="flex justify-center mt-2">
+                <UButton
+                  @click="copyToClipboard"
+                  variant="outline"
+                  class="w-full"
+                >
+                  <p class="mx-auto">Copy Banner URL</p>
+                </UButton>
+              </div>
+              <template #footer>
+                <div class="flex flex-col space-y-4">
+                  <UFormGroup label="Markdown" name="markdown">
+                    <UInput
+                      :model-value="`![Banner](${computedResultUrl})`"
+                      readonly
+                    />
+                  </UFormGroup>
+                  <UFormGroup label="BBCode" name="bbcode">
+                    <UInput
+                      :model-value="`[img]${computedResultUrl}[/img]`"
+                      readonly
+                    />
+                  </UFormGroup>
+                  <UFormGroup label="HTML" name="html">
+                    <UInput
+                      :model-value="`<img src='${computedResultUrl}' alt='Banner' />`"
+                      readonly
+                    />
+                  </UFormGroup>
+                </div>
+              </template>
+            </UCard>
+          </UModal>
         </template>
       </UCard>
     </template>
