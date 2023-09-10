@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { getTemplates } from "~/utils/templates";
 import { storeToRefs } from "pinia";
 import { useBannerDetailsStore } from "~/stores/bannerDetails";
+import { useConstantStore } from "~/stores/constants";
 
 defineProps({
   label: String,
@@ -9,8 +9,9 @@ defineProps({
 });
 
 const store = useBannerDetailsStore();
+const constants = useConstantStore();
 const { selectedTemplate } = storeToRefs(store);
-const templates = await getTemplates();
+const templates = constants.templates;
 </script>
 
 <script lang="ts">

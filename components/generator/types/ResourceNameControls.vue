@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import { getAlignments, getFontFaces } from "~/utils/templates";
+import { useConstantStore } from "~/stores/constants";
 
 const store = useBannerDetailsStore();
+const constants = useConstantStore();
 const {
   rXOffset,
   rYOffset,
@@ -14,8 +15,8 @@ const {
   rTextOverride,
 } = storeToRefs(store);
 
-const alignments = await getAlignments();
-const fonts = await getFontFaces();
+const alignments = constants.alignments;
+const fonts = constants.fontFaces;
 </script>
 
 <script lang="ts">
@@ -63,11 +64,7 @@ export default {
       />
     </UFormGroup>
     <UFormGroup label="Font Face" name="font">
-      <USelect
-        v-model="rFontFace"
-        :options="fonts"
-        option-attribute="value"
-      />
+      <USelect v-model="rFontFace" :options="fonts" option-attribute="value" />
     </UFormGroup>
     <UFormGroup label="Text Override" name="override">
       <UInput v-model="rTextOverride" type="text" class="w-full" />

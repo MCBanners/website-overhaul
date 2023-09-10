@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useBannerDetailsStore } from "~/stores/bannerDetails";
+import { useConstantStore } from "~/stores/constants";
 
 defineProps({
   label: String,
@@ -8,7 +9,8 @@ defineProps({
 });
 
 const store = useBannerDetailsStore();
-const templates = await getTemplates();
+const constants = useConstantStore();
+const templates = constants.templates;
 
 const {
   logoSize,
@@ -36,7 +38,7 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     rFontBold.value,
     rTextAlignment.value,
     rFontFace.value,
-    rTextOverride.value,
+    rTextOverride.value
   );
 });
 </script>
