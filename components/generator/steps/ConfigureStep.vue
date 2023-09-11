@@ -9,6 +9,7 @@ import ReviewCountSection from "../sections/ReviewCountSection.vue";
 import StarSection from "../sections/StarSection.vue";
 import DownloadCountSection from "../sections/DownloadCountSection.vue";
 import UpdatedTimeSection from "../sections/UpdatedTimeSection.vue";
+import PriceSection from "../sections/PriceSection.vue";
 
 const store = useBannerDetailsStore();
 const { logoSize, selectedTemplate, bannerId, bannerPlatform } =
@@ -58,7 +59,6 @@ const configureItems = [
   {
     key: "price",
     label: "Price",
-    disabled: true,
     description: "Change the price of your banner.",
   },
 ];
@@ -191,6 +191,9 @@ export default {
             :label="item.label"
             :description="item.description"
           />
+        </div>
+        <div v-if="item.key === 'price'" class="space-y-3">
+          <PriceSection :label="item.label" :description="item.description" />
         </div>
       </div>
     </template>

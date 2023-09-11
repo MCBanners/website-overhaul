@@ -52,6 +52,12 @@ const {
   uFontBold,
   uTextAlignment,
   uFontFace,
+  pXOffset,
+  pYOffset,
+  pFontSize,
+  pFontBold,
+  pTextAlignment,
+  pFontFace,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
@@ -94,7 +100,13 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     uFontSize.value,
     uFontBold.value,
     uTextAlignment.value,
-    uFontFace.value
+    uFontFace.value,
+    pXOffset.value,
+    pYOffset.value,
+    pFontSize.value,
+    pFontBold.value,
+    pTextAlignment.value,
+    pFontFace.value
   );
 });
 </script>
