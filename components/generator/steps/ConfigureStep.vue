@@ -42,6 +42,11 @@ const configureItems = [
     description: "Change the review count of your banner.",
   },
   {
+    key: "starredCount",
+    label: "Star Count",
+    description: "Change the star count of your banner.",
+  },
+  {
     key: "lastUpdated",
     label: "Updated Time",
     description: "Change the last updated design of your banner.",
@@ -118,6 +123,14 @@ const platformSectionConfig: Record<string, string[]> = {
     "downloadCount",
     "price",
   ],
+  hangar: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "starredCount",
+    "downloadCount",
+  ],
 };
 
 const filteredItems = computed(() => {
@@ -171,7 +184,7 @@ export default {
             :description="item.description"
           />
         </div>
-        <div v-if="item.key === 'reviewCount'" class="space-y-3">
+        <div v-if="item.key === 'reviewCount' || item.key === 'starredCount'" class="space-y-3">
           <ReviewCountSection
             :label="item.label"
             :description="item.description"

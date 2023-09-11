@@ -55,6 +55,11 @@ const platforms = [
     value: "Polymart",
     type: "POLYMART_RESOURCE",
   },
+  {
+    key: "hangar",
+    value: "Hangar",
+    type: "HANGAR_RESOURCE",
+  }
 ];
 
 const idForm = reactive({ id: "", platform: "Spigot" });
