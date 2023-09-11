@@ -40,6 +40,14 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const starYOffset = ref(51);
   const starGap = ref(16);
 
+  // Downloads
+  const dXOffset = ref(104);
+  const dYOffset = ref(83);
+  const dFontSize = ref(14);
+  const dFontBold = ref(false);
+  const dTextAlignment = ref("Left");
+  const dFontFace = ref("Source Sans Pro");
+
   async function saveBanner(type: string): Promise<BannerSaveResponse> {
     const data = {
       type: type,
@@ -72,6 +80,12 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
         stars__x: starXOffset.value,
         stars__y: starYOffset.value,
         stars__gap: starGap.value,
+        downloads__x: dXOffset.value,
+        downloads__y: dYOffset.value,
+        downloads__font_size: dFontSize.value,
+        downloads__font_bold: dFontBold.value,
+        downloads__text_align: dTextAlignment.value,
+        downloads__font_face: dFontFace.value,
       },
     };
 
@@ -120,5 +134,11 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
     starXOffset,
     starYOffset,
     starGap,
+    dXOffset,
+    dYOffset,
+    dFontSize,
+    dFontBold,
+    dTextAlignment,
+    dFontFace,
   };
 });

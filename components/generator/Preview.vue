@@ -40,6 +40,12 @@ const {
   starXOffset,
   starYOffset,
   starGap,
+  dXOffset,
+  dYOffset,
+  dFontSize,
+  dFontBold,
+  dTextAlignment,
+  dFontFace,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
@@ -70,7 +76,13 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     revFontFace.value,
     starXOffset.value,
     starYOffset.value,
-    starGap.value
+    starGap.value,
+    dXOffset.value,
+    dYOffset.value,
+    dFontSize.value,
+    dFontBold.value,
+    dTextAlignment.value,
+    dFontFace.value
   );
 });
 </script>
