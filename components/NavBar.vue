@@ -14,6 +14,7 @@
             </div>
           </div>
           <ColorModeButton />
+          <GitHubButton />
         </div>
       </div>
     </nav>

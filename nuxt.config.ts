@@ -6,4 +6,7 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
   },
+  ui: {
+    icons: ["heroicons", "simple-icons"],
+  },
 });
