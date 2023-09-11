@@ -5,9 +5,9 @@
         <h1
           class="text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-7xl"
         >
-          <span class="text-primary">MCBanners</span>
+          <img src="/logo_transparent_cropped.png" alt="logo" />
         </h1>
-        <p class="mt-6 text-lg tracking-tight text-gray-600 dark:text-gray-300">
+        <p class="mt-6 text-2xl tracking-tight text-gray-600 dark:text-gray-300">
           <span
             >We turn backend statistics into beautiful front-end images that can
             be displayed on forums and more.</span
