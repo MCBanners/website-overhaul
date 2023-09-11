@@ -31,6 +31,12 @@ const {
   aFontBold,
   aTextAlignment,
   aFontFace,
+  revXOffset,
+  revYOffset,
+  revFontSize,
+  revFontBold,
+  revTextAlignment,
+  revFontFace,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
@@ -52,7 +58,13 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     aFontSize.value,
     aFontBold.value,
     aTextAlignment.value,
-    aFontFace.value
+    aFontFace.value,
+    revXOffset.value,
+    revYOffset.value,
+    revFontSize.value,
+    revFontBold.value,
+    revTextAlignment.value,
+    revFontFace.value
   );
 });
 </script>
@@ -60,7 +72,14 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
 <template>
   <UCard class="w-1/3">
     <template #header>
-      <h1 class="text-center font-bold">Preview</h1>
+      <h3
+        class="text-base font-semibold leading-6 text-gray-900 dark:text-white text-center"
+      >
+        Preview
+      </h3>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 text-center">
+        This is how your banner will look.
+      </p>
     </template>
     <img
       :alt="label"
