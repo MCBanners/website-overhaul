@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { BannerSaveResponse } from "~/types/misc";
+import { useConstantStore } from "./constants";
 
 export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const bannerId = ref("0");
@@ -65,13 +66,17 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const pFontFace = ref("Source Sans Pro");
 
   async function saveBanner(type: string): Promise<BannerSaveResponse> {
+    const constants = useConstantStore();
     const data = {
       type: type,
       metadata: {
         resource_id: bannerId.value,
       },
       settings: {
-        background__template: selectedTemplate.value,
+        background__template: getTemplateKey(
+          selectedTemplate.value,
+          constants.templates
+        )!,
         logo__size: logoSize.value,
         logo__x: logoXOffset.value,
         resource_name__x: rXOffset.value,
