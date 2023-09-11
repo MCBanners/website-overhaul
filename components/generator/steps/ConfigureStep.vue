@@ -8,9 +8,11 @@ import AuthorNameSection from "../sections/AuthorNameSection.vue";
 import ReviewCountSection from "../sections/ReviewCountSection.vue";
 import StarSection from "../sections/StarSection.vue";
 import DownloadCountSection from "../sections/DownloadCountSection.vue";
+import UpdatedTimeSection from "../sections/UpdatedTimeSection.vue";
 
 const store = useBannerDetailsStore();
-const { logoSize, selectedTemplate, bannerId } = storeToRefs(store);
+const { logoSize, selectedTemplate, bannerId, bannerPlatform } =
+  storeToRefs(store);
 
 const configureItems = [
   {
@@ -39,6 +41,11 @@ const configureItems = [
     description: "Change the review count of your banner.",
   },
   {
+    key: "lastUpdated",
+    label: "Updated Time",
+    description: "Change the last updated design of your banner.",
+  },
+  {
     key: "stars",
     label: "Stars",
     description: "Change the stars of your banner.",
@@ -55,6 +62,68 @@ const configureItems = [
     description: "Change the price of your banner.",
   },
 ];
+
+const platformSectionConfig: Record<string, string[]> = {
+  spigot: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "reviewCount",
+    "stars",
+    "downloadCount",
+    "price",
+  ],
+  ore: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "reviewCount",
+    "downloadCount",
+  ],
+  curseforge: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "lastUpdated",
+    "downloadCount",
+  ],
+  modrinth: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "lastUpdated",
+    "downloadCount",
+  ],
+  builtbybit: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "reviewCount",
+    "stars",
+    "downloadCount",
+    "price",
+  ],
+  polymart: [
+    "background",
+    "resourceLogo",
+    "resourceName",
+    "authorName",
+    "reviewCount",
+    "stars",
+    "downloadCount",
+    "price",
+  ],
+};
+
+const filteredItems = computed(() => {
+  const sectionsToShow = platformSectionConfig[bannerPlatform.value] || [];
+  return configureItems.filter((item) => sectionsToShow.includes(item.key));
+});
 </script>
 
 <script lang="ts">
@@ -65,7 +134,7 @@ export default {
 
 <template>
   <UTabs
-    :items="configureItems"
+    :items="filteredItems"
     orientation="vertical"
     :ui="{
       wrapper: 'flex items-center gap-4',
@@ -113,6 +182,12 @@ export default {
         </div>
         <div v-if="item.key === 'downloadCount'" class="space-y-3">
           <DownloadCountSection
+            :label="item.label"
+            :description="item.description"
+          />
+        </div>
+        <div v-if="item.key === 'lastUpdated'" class="space-y-3">
+          <UpdatedTimeSection
             :label="item.label"
             :description="item.description"
           />

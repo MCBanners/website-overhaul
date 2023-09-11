@@ -31,7 +31,7 @@ const platforms = [
     type: "SPIGOT_RESOURCE",
   },
   {
-    key: "sponge",
+    key: "ore",
     value: "Sponge",
     type: "SPONGE_RESOURCE",
   },

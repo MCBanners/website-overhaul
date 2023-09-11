@@ -31,7 +31,13 @@ export function generateImageUrl(
   dFontSize: number,
   dFontBold: boolean,
   dTextAlignment: string,
-  dFontFace: string
+  dFontFace: string,
+  uXOffset: number,
+  uYOffset: number,
+  uFontSize: number,
+  uFontBold: boolean,
+  uTextAlignment: string,
+  uFontFace: string
 ) {
-  return `https://api.mcbanners.com/banner/resource/${platform}/${id}/banner.png?background__template=${templateKey}&logo__size=${logoSize}&logo__x=${logoXOffset}&resource_name__x=${rXOffset}&resource_name__y=${rYOffset}&resource_name__font_size=${rFontSize}&resource_name__font_bold=${rFontBold}&resource_name__text_align=${rTextAlignment}&resource_name__font_face=${rFontFace}&resource_name__display=${rTextOverride}&author_name__x=${aXOffset}&author_name__y=${aYOffset}&author_name__font_size=${aFontSize}&author_name__font_bold=${aFontBold}&author_name__text_align=${aTextAlignment}&author_name__font_face=${aFontFace}&reviews__x=${revXOffset}&reviews__y=${revYOffset}&reviews__font_size=${revFontSize}&reviews__font_bold=${revFontBold}&reviews__text_align=${revTextAlignment}&reviews__font_face=${revFontFace}&stars__x=${starXOffset}&stars__y=${starYOffset}&stars__gap=${starGap}&downloads__x=${dXOffset}&downloads__y=${dYOffset}&downloads__font_size=${dFontSize}&downloads__font_bold=${dFontBold}&downloads__text_align=${dTextAlignment}&downloads__font_face=${dFontFace}`;
+  return `https://api.mcbanners.com/banner/resource/${platform}/${id}/banner.png?background__template=${templateKey}&logo__size=${logoSize}&logo__x=${logoXOffset}&resource_name__x=${rXOffset}&resource_name__y=${rYOffset}&resource_name__font_size=${rFontSize}&resource_name__font_bold=${rFontBold}&resource_name__text_align=${rTextAlignment}&resource_name__font_face=${rFontFace}&resource_name__display=${rTextOverride}&author_name__x=${aXOffset}&author_name__y=${aYOffset}&author_name__font_size=${aFontSize}&author_name__font_bold=${aFontBold}&author_name__text_align=${aTextAlignment}&author_name__font_face=${aFontFace}&reviews__x=${revXOffset}&reviews__y=${revYOffset}&reviews__font_size=${revFontSize}&reviews__font_bold=${revFontBold}&reviews__text_align=${revTextAlignment}&reviews__font_face=${revFontFace}&stars__x=${starXOffset}&stars__y=${starYOffset}&stars__gap=${starGap}&downloads__x=${dXOffset}&downloads__y=${dYOffset}&downloads__font_size=${dFontSize}&downloads__font_bold=${dFontBold}&downloads__text_align=${dTextAlignment}&downloads__font_face=${dFontFace}&updated__x=${uXOffset}&updated__y=${uYOffset}&updated__font_size=${uFontSize}&updated__font_bold=${uFontBold}&updated__text_align=${uTextAlignment}&updated__font_face=${uFontFace}`;
 }

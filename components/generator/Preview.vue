@@ -46,6 +46,12 @@ const {
   dFontBold,
   dTextAlignment,
   dFontFace,
+  uXOffset,
+  uYOffset,
+  uFontSize,
+  uFontBold,
+  uTextAlignment,
+  uFontFace,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
@@ -82,7 +88,13 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     dFontSize.value,
     dFontBold.value,
     dTextAlignment.value,
-    dFontFace.value
+    dFontFace.value,
+    uXOffset.value,
+    uYOffset.value,
+    uFontSize.value,
+    uFontBold.value,
+    uTextAlignment.value,
+    uFontFace.value
   );
 });
 </script>
