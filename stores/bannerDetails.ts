@@ -35,6 +35,11 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
   const revTextAlignment = ref("Left");
   const revFontFace = ref("Source Sans Pro");
 
+  // Stars
+  const starXOffset = ref(180);
+  const starYOffset = ref(51);
+  const starGap = ref(16);
+
   async function saveBanner(type: string): Promise<BannerSaveResponse> {
     const data = {
       type: type,
@@ -64,6 +69,9 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
         reviews__font_bold: revFontBold.value,
         reviews__text_align: revTextAlignment.value,
         reviews__font_face: revFontFace.value,
+        stars__x: starXOffset.value,
+        stars__y: starYOffset.value,
+        stars__gap: starGap.value,
       },
     };
 
@@ -109,5 +117,8 @@ export const useBannerDetailsStore = defineStore("bannerDetails", () => {
     revFontBold,
     revTextAlignment,
     revFontFace,
+    starXOffset,
+    starYOffset,
+    starGap,
   };
 });

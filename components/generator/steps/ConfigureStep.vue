@@ -6,6 +6,7 @@ import LogoSection from "~/components/generator/sections/LogoSection.vue";
 import ResourceNameSection from "../sections/ResourceNameSection.vue";
 import AuthorNameSection from "../sections/AuthorNameSection.vue";
 import ReviewCountSection from "../sections/ReviewCountSection.vue";
+import StarSection from "../sections/StarSection.vue";
 
 const store = useBannerDetailsStore();
 const { logoSize, selectedTemplate, bannerId } = storeToRefs(store);
@@ -101,6 +102,12 @@ export default {
         </div>
         <div v-if="item.key === 'reviewCount'" class="space-y-3">
           <ReviewCountSection
+            :label="item.label"
+            :description="item.description"
+          />
+        </div>
+        <div v-if="item.key === 'stars'" class="space-y-3">
+          <StarSection
             :label="item.label"
             :description="item.description"
           />

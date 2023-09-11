@@ -22,7 +22,10 @@ export function generateImageUrl(
   revFontSize: number,
   revFontBold: boolean,
   revTextAlignment: string,
-  revFontFace: string
+  revFontFace: string,
+  starXOffset: number,
+  starYOffset: number,
+  starGap: number
 ) {
-  return `https://api.mcbanners.com/banner/resource/${platform}/${id}/banner.png?background__template=${templateKey}&logo__size=${logoSize}&logo__x=${logoXOffset}&resource_name__x=${rXOffset}&resource_name__y=${rYOffset}&resource_name__font_size=${rFontSize}&resource_name__font_bold=${rFontBold}&resource_name__text_align=${rTextAlignment}&resource_name__font_face=${rFontFace}&resource_name__display=${rTextOverride}&author_name__x=${aXOffset}&author_name__y=${aYOffset}&author_name__font_size=${aFontSize}&author_name__font_bold=${aFontBold}&author_name__text_align=${aTextAlignment}&author_name__font_face=${aFontFace}&reviews__x=${revXOffset}&reviews__y=${revYOffset}&reviews__font_size=${revFontSize}&reviews__font_bold=${revFontBold}&reviews__text_align=${revTextAlignment}&reviews__font_face=${revFontFace}`;
+  return `https://api.mcbanners.com/banner/resource/${platform}/${id}/banner.png?background__template=${templateKey}&logo__size=${logoSize}&logo__x=${logoXOffset}&resource_name__x=${rXOffset}&resource_name__y=${rYOffset}&resource_name__font_size=${rFontSize}&resource_name__font_bold=${rFontBold}&resource_name__text_align=${rTextAlignment}&resource_name__font_face=${rFontFace}&resource_name__display=${rTextOverride}&author_name__x=${aXOffset}&author_name__y=${aYOffset}&author_name__font_size=${aFontSize}&author_name__font_bold=${aFontBold}&author_name__text_align=${aTextAlignment}&author_name__font_face=${aFontFace}&reviews__x=${revXOffset}&reviews__y=${revYOffset}&reviews__font_size=${revFontSize}&reviews__font_bold=${revFontBold}&reviews__text_align=${revTextAlignment}&reviews__font_face=${revFontFace}&stars__x=${starXOffset}&stars__y=${starYOffset}&stars__gap=${starGap}`;
 }

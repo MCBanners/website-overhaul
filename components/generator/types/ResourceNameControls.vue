@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row mb-4 w-full">
+  <div class="flex flex-row mb-4">
     <FormInput
       v-model="rXOffset"
       name="xoffset"

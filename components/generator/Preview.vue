@@ -37,6 +37,9 @@ const {
   revFontBold,
   revTextAlignment,
   revFontFace,
+  starXOffset,
+  starYOffset,
+  starGap,
 } = storeToRefs(store);
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
@@ -64,7 +67,10 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     revFontSize.value,
     revFontBold.value,
     revTextAlignment.value,
-    revFontFace.value
+    revFontFace.value,
+    starXOffset.value,
+    starYOffset.value,
+    starGap.value
   );
 });
 </script>
