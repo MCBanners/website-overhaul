@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PriceControls from "../types/PriceControls.vue";
+import PriceControls from "~/components/generator/types/PriceControls.vue";
 
 defineProps({
   label: String,

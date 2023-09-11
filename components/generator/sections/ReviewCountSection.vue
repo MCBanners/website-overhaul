@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ReviewCountControls from '../types/ReviewCountControls.vue';
+import ReviewCountControls from '~/components/generator/types/ReviewCountControls.vue';
 
 defineProps({
   label: String,

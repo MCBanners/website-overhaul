@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import StarControls from "../types/StarControls.vue";
+import StarControls from "~/components/generator/types/StarControls.vue";
 
 defineProps({
   label: String,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ResourceNameControls from "../types/ResourceNameControls.vue";
+import ResourceNameControls from "~/components/generator/types/ResourceNameControls.vue";
 
 defineProps({
   label: String,

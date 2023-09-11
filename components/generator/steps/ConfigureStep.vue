@@ -3,13 +3,13 @@ import { storeToRefs } from "pinia";
 import { useBannerDetailsStore } from "~/stores/bannerDetails";
 import BackgroundSection from "~/components/generator/sections/BackgroundSection.vue";
 import LogoSection from "~/components/generator/sections/LogoSection.vue";
-import ResourceNameSection from "../sections/ResourceNameSection.vue";
-import AuthorNameSection from "../sections/AuthorNameSection.vue";
-import ReviewCountSection from "../sections/ReviewCountSection.vue";
-import StarSection from "../sections/StarSection.vue";
-import DownloadCountSection from "../sections/DownloadCountSection.vue";
-import UpdatedTimeSection from "../sections/UpdatedTimeSection.vue";
-import PriceSection from "../sections/PriceSection.vue";
+import ResourceNameSection from "~/components/generator/sections/ResourceNameSection.vue";
+import AuthorNameSection from "~/components/generator/sections/AuthorNameSection.vue";
+import ReviewCountSection from "~/components/generator/sections/ReviewCountSection.vue";
+import StarSection from "~/components/generator/sections/StarSection.vue";
+import DownloadCountSection from "~/components/generator/sections/DownloadCountSection.vue";
+import UpdatedTimeSection from "~/components/generator/sections/UpdatedTimeSection.vue";
+import PriceSection from "~/components/generator/sections/PriceSection.vue";
 
 const store = useBannerDetailsStore();
 const { logoSize, selectedTemplate, bannerId, bannerPlatform } =

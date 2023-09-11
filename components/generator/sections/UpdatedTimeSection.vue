@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UpdatedTimeControls from "../types/UpdatedTimeControls.vue";
+import UpdatedTimeControls from "~/components/generator/types/UpdatedTimeControls.vue";
 
 defineProps({
   label: String,

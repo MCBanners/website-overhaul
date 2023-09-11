@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DownloadCountControls from "../types/DownloadCountControls.vue";
+import DownloadCountControls from "~/components/generator/types/DownloadCountControls.vue";
 
 defineProps({
   label: String,

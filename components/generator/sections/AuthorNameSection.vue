@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AuthorNameControls from "../types/AuthorNameControls.vue";
+import AuthorNameControls from "~/components/generator/types/AuthorNameControls.vue";
 
 defineProps({
   label: String,
