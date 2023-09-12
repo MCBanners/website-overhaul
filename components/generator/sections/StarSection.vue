@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import StarControls from "~/components/generator/types/StarControls.vue";
+import StarControls from '~/components/generator/types/StarControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "StarSection",
-};
+  name: 'StarSection'
+}
 </script>
 
 <template>
-  <UCard class="ml-4">
+  <UCard class="ml-4 h-full">
     <template #header>
       <h3
         class="text-base font-semibold leading-6 text-gray-900 dark:text-white"

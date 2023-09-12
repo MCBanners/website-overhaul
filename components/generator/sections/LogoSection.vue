@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import LogoControls from '~/components/generator/types/LogoControls.vue';
+import LogoControls from '~/components/generator/types/LogoControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "LogoSection",
-};
+  name: 'LogoSection'
+}
 </script>
 
 <template>
-  <UCard class="ml-4">
+  <UCard class="ml-4 h-full">
     <template #header>
       <h3
         class="text-base font-semibold leading-6 text-gray-900 dark:text-white"

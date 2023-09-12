@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import FormInput from "~/components/generator/types/raw/FormInput.vue";
+import { storeToRefs } from 'pinia'
+import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore();
-const { logoSize, logoXOffset } = storeToRefs(store);
+const store = useBannerDetailsStore()
+const { logoSize, logoXOffset } = storeToRefs(store)
 </script>
 
 <script lang="ts">
 export default {
-  name: "LogoControls",
-};
+  name: 'LogoControls'
+}
 </script>
 
 <template>
@@ -21,7 +21,7 @@ export default {
       label="Size"
       type="number"
       class="w-1/3 mr-4"
-      trailText="px"
+      trail-text="px"
     />
     <FormInput
       v-model="logoXOffset"
@@ -29,7 +29,7 @@ export default {
       label="X Offset"
       type="number"
       class="w-1/3 mr-4"
-      trailText="px"
+      trail-text="px"
     />
   </div>
 </template>

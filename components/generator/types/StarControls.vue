@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import FormInput from "~/components/generator/types/raw/FormInput.vue";
+import { storeToRefs } from 'pinia'
+import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore();
-const { starXOffset, starYOffset, starGap } = storeToRefs(store);
+const store = useBannerDetailsStore()
+const { starXOffset, starYOffset, starGap } = storeToRefs(store)
 </script>
 
 <script lang="ts">
 export default {
-  name: "StarControls",
-};
+  name: 'StarControls'
+}
 </script>
 
 <template>
@@ -21,7 +21,7 @@ export default {
       label="X Offset"
       type="number"
       class="w-1/4 mr-4"
-      trailText="px"
+      trail-text="px"
     />
     <FormInput
       v-model="starYOffset"
@@ -29,7 +29,7 @@ export default {
       label="Y Offset"
       type="number"
       class="w-1/4 mr-4"
-      trailText="px"
+      trail-text="px"
     />
     <FormInput
       v-model="starGap"
@@ -37,7 +37,7 @@ export default {
       label="Gap"
       type="number"
       class="w-1/4 mr-4"
-      trailText="px"
+      trail-text="px"
     />
   </div>
 </template>

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import DownloadCountControls from "~/components/generator/types/DownloadCountControls.vue";
+import DownloadCountControls from '~/components/generator/types/DownloadCountControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "DownloadCountSection",
-};
+  name: 'DownloadCountSection'
+}
 </script>
 
 <template>

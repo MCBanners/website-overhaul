@@ -6,10 +6,14 @@
           <div class="flex w-full justify-evenly space-y-4">
             <div class="flex items-center text-gray-600 dark:text-gray-300">
               <NuxtLink to="/">
-                <h5 class="font-bold mb-0 ml-4">Home</h5>
+                <h5 class="font-bold mb-0 ml-4">
+                  Home
+                </h5>
               </NuxtLink>
               <NuxtLink to="/resources">
-                <h5 class="font-bold mb-0 ml-4">Resource Banners</h5>
+                <h5 class="font-bold mb-0 ml-4">
+                  Resource Banners
+                </h5>
               </NuxtLink>
             </div>
           </div>

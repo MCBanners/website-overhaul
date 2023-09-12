@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import ReviewCountControls from '~/components/generator/types/ReviewCountControls.vue';
+import ReviewCountControls from '~/components/generator/types/ReviewCountControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "ReviewCountSection",
-};
+  name: 'ReviewCountSection'
+}
 </script>
 
 <template>

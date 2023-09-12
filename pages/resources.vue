@@ -1,127 +1,127 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import ConfigureStep from "~/components/generator/steps/ConfigureStep.vue";
+import { storeToRefs } from 'pinia'
+import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import ConfigureStep from '~/components/generator/steps/ConfigureStep.vue'
 
-const store = useBannerDetailsStore();
+const store = useBannerDetailsStore()
 
-const { bannerId, bannerPlatform } = storeToRefs(store);
+const { bannerId, bannerPlatform } = storeToRefs(store)
 
 const items = [
   {
-    key: "details",
-    label: "Resource Details",
+    key: 'details',
+    label: 'Resource Details',
     disabled: false,
     description:
-      "Enter the Resource ID that you want to generate a banner for.",
+      'Enter the Resource ID that you want to generate a banner for.'
   },
   {
-    key: "configure",
-    label: "Configure Banner",
+    key: 'configure',
+    label: 'Configure Banner',
     disabled: false,
     description:
-      "Configure the banner to your liking. You can change the background, resource logo, resource name, author name, review count, stars, download count, and price of your banner.",
-  },
-];
+      'Configure the banner to your liking. You can change the background, resource logo, resource name, author name, review count, stars, download count, and price of your banner.'
+  }
+]
 
 const platforms = [
   {
-    key: "spigot",
-    value: "Spigot",
-    type: "SPIGOT_RESOURCE",
+    key: 'spigot',
+    value: 'Spigot',
+    type: 'SPIGOT_RESOURCE'
   },
   {
-    key: "ore",
-    value: "Sponge",
-    type: "SPONGE_RESOURCE",
+    key: 'ore',
+    value: 'Sponge',
+    type: 'SPONGE_RESOURCE'
   },
   {
-    key: "curseforge",
-    value: "CurseForge",
-    type: "CURSEFORGE_RESOURCE",
+    key: 'curseforge',
+    value: 'CurseForge',
+    type: 'CURSEFORGE_RESOURCE'
   },
   {
-    key: "modrinth",
-    value: "Modrinth",
-    type: "MODRINTH_RESOURCE",
+    key: 'modrinth',
+    value: 'Modrinth',
+    type: 'MODRINTH_RESOURCE'
   },
   {
-    key: "builtbybit",
-    value: "BuiltByBit",
-    type: "BUILTBYBIT_RESOURCE",
+    key: 'builtbybit',
+    value: 'BuiltByBit',
+    type: 'BUILTBYBIT_RESOURCE'
   },
   {
-    key: "polymart",
-    value: "Polymart",
-    type: "POLYMART_RESOURCE",
+    key: 'polymart',
+    value: 'Polymart',
+    type: 'POLYMART_RESOURCE'
   },
   {
-    key: "hangar",
-    value: "Hangar",
-    type: "HANGAR_RESOURCE",
+    key: 'hangar',
+    value: 'Hangar',
+    type: 'HANGAR_RESOURCE'
   }
-];
+]
 
-const idForm = reactive({ id: "", platform: "Spigot" });
-const index = ref(0);
+const idForm = reactive({ id: '', platform: 'Spigot' })
+const index = ref(0)
 
-const toast = useToast();
+const toast = useToast()
 
-const isOpen = ref(false);
-const mnemonic = ref("");
+const isOpen = ref(false)
+const mnemonic = ref('')
 
-function getPlatformKey(value: string) {
-  return platforms.find((platform) => platform.value === value)?.key;
+function getPlatformKey (value: string) {
+  return platforms.find(platform => platform.value === value)?.key
 }
 
-function getPlatformType(value: string) {
-  return platforms.find((platform) => platform.value === value)?.type;
+function getPlatformType (value: string) {
+  return platforms.find(platform => platform.value === value)?.type
 }
 
-function copyToClipboard() {
-  navigator.clipboard.writeText(computedResultUrl.value);
+function copyToClipboard () {
+  navigator.clipboard.writeText(computedResultUrl.value)
   toast.add({
-    id: "copied",
-    title: "Copied!",
-    description: "The URL has been copied to your clipboard.",
-    timeout: 3000,
-  });
+    id: 'copied',
+    title: 'Copied!',
+    description: 'The URL has been copied to your clipboard.',
+    timeout: 3000
+  })
 }
 
-async function save(type: string) {
-  const saved = await store.saveBanner(type);
+async function save (type: string) {
+  const saved = await store.saveBanner(type)
   if (saved.mnemonic) {
-    mnemonic.value = saved.mnemonic;
-    isOpen.value = true;
+    mnemonic.value = saved.mnemonic
+    isOpen.value = true
   }
 }
 
 const computedResultUrl: ComputedRef<string> = computed(() => {
-  return `https://api.mcbanners.com/banner/saved/${mnemonic.value}.png`;
-});
+  return `https://api.mcbanners.com/banner/saved/${mnemonic.value}.png`
+})
 
-async function onSubmit(form: any) {
-  const id = form.id;
-  const platform = getPlatformKey(form.platform);
+async function onSubmit (form: any) {
+  const id = form.id
+  const platform = getPlatformKey(form.platform)
   const data = await fetch(
     `https://api.mcbanners.com/banner/resource/${platform}/${id}/isValid`
-  );
-  const json = await data.json();
+  )
+  const json = await data.json()
   if (json.valid) {
-    bannerId.value = id;
-    bannerPlatform.value = platform!;
-    items[1].disabled = false;
-    index.value = 1;
-    items[0].disabled = true;
+    bannerId.value = id
+    bannerPlatform.value = platform!
+    items[1].disabled = false
+    index.value = 1
+    items[0].disabled = true
   } else {
-    index.value = 0;
+    index.value = 0
     toast.add({
-      id: "fetch_failed",
-      title: "Error!",
+      id: 'fetch_failed',
+      title: 'Error!',
       description:
-        "Failed to fetch resource. Check that the resource ID is correct.",
-      timeout: 3000,
-    });
+        'Failed to fetch resource. Check that the resource ID is correct.',
+      timeout: 3000
+    })
   }
 }
 </script>
@@ -168,13 +168,15 @@ async function onSubmit(form: any) {
         </div>
         <template #footer>
           <div v-if="item.key === 'details'">
-            <UButton type="submit" variant="outline"> Fetch </UButton>
+            <UButton type="submit" variant="outline">
+              Fetch
+            </UButton>
           </div>
           <div v-else>
             <UButton
               type="submit"
-              @click="() => save(getPlatformType(idForm.platform)!)"
               variant="outline"
+              @click="() => save(getPlatformType(idForm.platform)!)"
             >
               Submit
             </UButton>
@@ -197,7 +199,7 @@ async function onSubmit(form: any) {
                 width="300"
                 height="100"
                 class="rounded-lg mx-auto"
-              />
+              >
               <UInput
                 v-model="computedResultUrl"
                 readonly
@@ -205,11 +207,13 @@ async function onSubmit(form: any) {
               />
               <div class="flex justify-center mt-2">
                 <UButton
-                  @click="copyToClipboard"
                   variant="outline"
                   class="w-full"
+                  @click="copyToClipboard"
                 >
-                  <p class="mx-auto">Copy Banner URL</p>
+                  <p class="mx-auto">
+                    Copy Banner URL
+                  </p>
                 </UButton>
               </div>
               <template #footer>

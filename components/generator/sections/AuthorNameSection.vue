@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import AuthorNameControls from "~/components/generator/types/AuthorNameControls.vue";
+import AuthorNameControls from '~/components/generator/types/AuthorNameControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "AuthorNameSection",
-};
+  name: 'AuthorNameSection'
+}
 </script>
 
 <template>

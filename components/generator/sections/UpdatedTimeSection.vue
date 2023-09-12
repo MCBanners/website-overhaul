@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import UpdatedTimeControls from "~/components/generator/types/UpdatedTimeControls.vue";
+import UpdatedTimeControls from '~/components/generator/types/UpdatedTimeControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "UpdatedTimeSection",
-};
+  name: 'UpdatedTimeSection'
+}
 </script>
 
 <template>

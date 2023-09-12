@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import PriceControls from "~/components/generator/types/PriceControls.vue";
+import PriceControls from '~/components/generator/types/PriceControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "PriceSection",
-};
+  name: 'PriceSection'
+}
 </script>
 
 <template>

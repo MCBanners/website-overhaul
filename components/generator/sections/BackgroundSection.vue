@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import { useConstantStore } from "~/stores/constants";
+import { storeToRefs } from 'pinia'
+import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useConstantStore } from '~/stores/constants'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 
-const store = useBannerDetailsStore();
-const constants = useConstantStore();
-const { selectedTemplate } = storeToRefs(store);
-const templates = constants.templates;
+const store = useBannerDetailsStore()
+const constants = useConstantStore()
+const { selectedTemplate } = storeToRefs(store)
+const templates = constants.templates
 </script>
 
 <script lang="ts">
 export default {
-  name: "BackgroundSection",
-};
+  name: 'BackgroundSection'
+}
 </script>
 
 <template>
-  <UCard class="ml-4">
+  <UCard class="ml-4 h-full">
     <template #header>
       <h3
         class="text-base font-semibold leading-6 text-gray-900 dark:text-white"

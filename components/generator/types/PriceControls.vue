@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import { useConstantStore } from "~/stores/constants";
-import FormInput from "~/components/generator/types/raw/FormInput.vue";
+import { storeToRefs } from 'pinia'
+import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useConstantStore } from '~/stores/constants'
+import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore();
-const constants = useConstantStore();
+const store = useBannerDetailsStore()
+const constants = useConstantStore()
 const { pXOffset, pYOffset, pFontSize, pFontBold, pTextAlignment, pFontFace } =
-  storeToRefs(store);
+  storeToRefs(store)
 
-const alignments = constants.alignments;
-const fonts = constants.fontFaces;
+const alignments = constants.alignments
+const fonts = constants.fontFaces
 </script>
 
 <script lang="ts">
 export default {
-  name: "PriceControls",
-};
+  name: 'PriceControls'
+}
 </script>
 
 <template>
@@ -27,7 +27,7 @@ export default {
       label="X Offset"
       type="number"
       class="w-1/6 mr-4"
-      trailText="px"
+      trail-text="px"
     />
     <FormInput
       v-model="pYOffset"
@@ -35,7 +35,7 @@ export default {
       label="Y Offset"
       type="number"
       class="w-1/6 mr-4"
-      trailText="px"
+      trail-text="px"
     />
     <FormInput
       v-model="pFontSize"
@@ -43,7 +43,7 @@ export default {
       label="Font Size"
       type="number"
       class="w-1/6 mr-4"
-      trailText="px"
+      trail-text="px"
     />
     <UFormGroup label="Bold" name="bold">
       <UToggle v-model="pFontBold" />

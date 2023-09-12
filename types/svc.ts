@@ -1,9 +1,3 @@
-export type SVC = {
-  fonts: Fonts;
-  templates: Templates;
-  text_alignments: TextAlignments;
-};
-
 export type Fonts = {
   ROBOTO: string;
   POPPINS: string;
@@ -33,4 +27,10 @@ export type TextAlignments = {
   CENTER: string;
   LEFT: string;
   RIGHT: string;
+};
+
+export type SVC = {
+  fonts: Fonts;
+  templates: Templates;
+  text_alignments: TextAlignments;
 };

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useBannerDetailsStore } from "~/stores/bannerDetails";
-import { useConstantStore } from "~/stores/constants";
+import { storeToRefs } from 'pinia'
+import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useConstantStore } from '~/stores/constants'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 
-const store = useBannerDetailsStore();
-const constants = useConstantStore();
-const templates = constants.templates;
+const store = useBannerDetailsStore()
+const constants = useConstantStore()
+const templates = constants.templates
 
 const {
   logoSize,
@@ -57,8 +57,8 @@ const {
   pFontSize,
   pFontBold,
   pTextAlignment,
-  pFontFace,
-} = storeToRefs(store);
+  pFontFace
+} = storeToRefs(store)
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
   return generateImageUrl(
@@ -107,8 +107,8 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
     pFontBold.value,
     pTextAlignment.value,
     pFontFace.value
-  );
-});
+  )
+})
 </script>
 
 <template>
@@ -129,6 +129,6 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
       width="300"
       height="100"
       class="rounded-lg"
-    />
+    >
   </UCard>
 </template>

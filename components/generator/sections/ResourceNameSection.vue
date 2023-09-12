@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import ResourceNameControls from "~/components/generator/types/ResourceNameControls.vue";
+import ResourceNameControls from '~/components/generator/types/ResourceNameControls.vue'
 
 defineProps({
   label: String,
-  description: String,
-});
+  description: String
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: "ResourceNameSection",
-};
+  name: 'ResourceNameSection'
+}
 </script>
 
 <template>
