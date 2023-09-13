@@ -1,113 +1,15 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
-import { useConstantStore } from '~/stores/constants'
+import { useDefaultStore } from '~/stores/defaults'
 
 defineProps({
   label: String,
   description: String
 })
 
-const store = useBannerDetailsStore()
-const constants = useConstantStore()
-const templates = constants.templates
-
-const {
-  logoSize,
-  logoXOffset,
-  selectedTemplate,
-  bannerId,
-  rXOffset,
-  rYOffset,
-  rFontSize,
-  rFontBold,
-  rTextAlignment,
-  rFontFace,
-  rTextOverride,
-  bannerPlatform,
-  aXOffset,
-  aYOffset,
-  aFontSize,
-  aFontBold,
-  aTextAlignment,
-  aFontFace,
-  revXOffset,
-  revYOffset,
-  revFontSize,
-  revFontBold,
-  revTextAlignment,
-  revFontFace,
-  starXOffset,
-  starYOffset,
-  starGap,
-  dXOffset,
-  dYOffset,
-  dFontSize,
-  dFontBold,
-  dTextAlignment,
-  dFontFace,
-  uXOffset,
-  uYOffset,
-  uFontSize,
-  uFontBold,
-  uTextAlignment,
-  uFontFace,
-  pXOffset,
-  pYOffset,
-  pFontSize,
-  pFontBold,
-  pTextAlignment,
-  pFontFace
-} = storeToRefs(store)
+const defaults = useDefaultStore()
 
 const computedImageUrl: ComputedRef<string> = computed(() => {
-  return generateImageUrl(
-    bannerId.value,
-    bannerPlatform.value,
-    getTemplateKey(selectedTemplate.value, templates)!,
-    logoSize.value,
-    logoXOffset.value,
-    rXOffset.value,
-    rYOffset.value,
-    rFontSize.value,
-    rFontBold.value,
-    rTextAlignment.value,
-    rFontFace.value,
-    rTextOverride.value,
-    aXOffset.value,
-    aYOffset.value,
-    aFontSize.value,
-    aFontBold.value,
-    aTextAlignment.value,
-    aFontFace.value,
-    revXOffset.value,
-    revYOffset.value,
-    revFontSize.value,
-    revFontBold.value,
-    revTextAlignment.value,
-    revFontFace.value,
-    starXOffset.value,
-    starYOffset.value,
-    starGap.value,
-    dXOffset.value,
-    dYOffset.value,
-    dFontSize.value,
-    dFontBold.value,
-    dTextAlignment.value,
-    dFontFace.value,
-    uXOffset.value,
-    uYOffset.value,
-    uFontSize.value,
-    uFontBold.value,
-    uTextAlignment.value,
-    uFontFace.value,
-    pXOffset.value,
-    pYOffset.value,
-    pFontSize.value,
-    pFontBold.value,
-    pTextAlignment.value,
-    pFontFace.value
-  )
+  return defaults.generateBannerUrl()
 })
 </script>
 

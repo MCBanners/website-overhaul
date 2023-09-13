@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { useConstantStore } from './stores/constants';
+import { useConstantStore } from './stores/constants'
+import { useDefaultStore } from './stores/defaults'
 
-const constants = useConstantStore();
-await constants.getConstants();
+const constants = useConstantStore()
+const defaults = useDefaultStore()
+
+await constants.getConstants()
+await defaults.getResource()
 </script>
 
 <template>

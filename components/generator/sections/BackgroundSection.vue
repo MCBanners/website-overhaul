@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
 import { useConstantStore } from '~/stores/constants'
+import { useDefaultStore } from '~/stores/defaults'
 
 defineProps({
   label: String,
   description: String
 })
 
-const store = useBannerDetailsStore()
+const defaults = useDefaultStore()
 const constants = useConstantStore()
-const { selectedTemplate } = storeToRefs(store)
+
+const { template } = storeToRefs(defaults)
+
 const templates = constants.templates
 </script>
 
@@ -33,7 +35,7 @@ export default {
       </p>
     </template>
     <USelect
-      v-model="selectedTemplate"
+      v-model="template"
       :options="templates"
       option-attribute="value"
     />

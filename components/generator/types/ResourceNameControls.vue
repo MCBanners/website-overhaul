@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
 import { useConstantStore } from '~/stores/constants'
 import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore()
+import { useDefaultStore } from '~/stores/defaults'
+
+const defaults = useDefaultStore()
 const constants = useConstantStore()
-const {
-  rXOffset,
-  rYOffset,
-  rFontSize,
-  rFontBold,
-  rTextAlignment,
-  rFontFace,
-  rTextOverride
-} = storeToRefs(store)
+const resource = storeToRefs(defaults).resource
+
+const { resource_name } = resource.value!
 
 const alignments = constants.alignments
 const fonts = constants.fontFaces
@@ -29,7 +24,7 @@ export default {
 <template>
   <div class="flex flex-row mb-4">
     <FormInput
-      v-model="rXOffset"
+      v-model="resource_name.x"
       name="xoffset"
       label="X Offset"
       type="number"
@@ -37,7 +32,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="rYOffset"
+      v-model="resource_name.y"
       name="yoffset"
       label="Y Offset"
       type="number"
@@ -45,7 +40,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="rFontSize"
+      v-model="resource_name.font_size"
       name="fontsize"
       label="Font Size"
       type="number"
@@ -53,22 +48,23 @@ export default {
       trail-text="px"
     />
     <UFormGroup label="Bold" name="bold">
-      <UToggle v-model="rFontBold" />
+      <UToggle v-model="resource_name.font_bold" />
     </UFormGroup>
   </div>
   <div class="flex flex-row space-x-4">
     <UFormGroup label="Text Alignment" name="alignment">
       <USelect
-        v-model="rTextAlignment"
+        v-model="resource_name.text_align"
+        value-attribute="key"
         :options="alignments"
         option-attribute="value"
       />
     </UFormGroup>
     <UFormGroup label="Font Face" name="font">
-      <USelect v-model="rFontFace" :options="fonts" option-attribute="value" />
+      <USelect v-model="resource_name.font_face" value-attribute="key" :options="fonts" option-attribute="value" />
     </UFormGroup>
     <UFormGroup label="Text Override" name="override">
-      <UInput v-model="rTextOverride" type="text" class="w-full" />
+      <UInput v-model="resource_name.display" value-attribute="key" type="text" class="w-full" />
     </UFormGroup>
   </div>
 </template>

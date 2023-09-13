@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useDefaultStore } from '~/stores/defaults'
 import BackgroundSection from '~/components/generator/sections/BackgroundSection.vue'
 import LogoSection from '~/components/generator/sections/LogoSection.vue'
 import ResourceNameSection from '~/components/generator/sections/ResourceNameSection.vue'
@@ -11,9 +11,13 @@ import DownloadCountSection from '~/components/generator/sections/DownloadCountS
 import UpdatedTimeSection from '~/components/generator/sections/UpdatedTimeSection.vue'
 import PriceSection from '~/components/generator/sections/PriceSection.vue'
 
-const store = useBannerDetailsStore()
-const { logoSize, selectedTemplate, bannerId, bannerPlatform } =
-  storeToRefs(store)
+const defaults = useDefaultStore()
+
+const { id, platform, template } = storeToRefs(defaults)
+
+const resource = storeToRefs(defaults).resource
+
+const { logo } = resource.value!
 
 const configureItems = [
   {
@@ -134,7 +138,7 @@ const platformSectionConfig: Record<string, string[]> = {
 }
 
 const filteredItems = computed(() => {
-  const sectionsToShow = platformSectionConfig[bannerPlatform.value] || []
+  const sectionsToShow = platformSectionConfig[platform.value] || []
   return configureItems.filter(item => sectionsToShow.includes(item.key))
 })
 </script>
@@ -159,9 +163,9 @@ export default {
         <GeneratorPreview
           :url="computedImageUrl"
           :label="item.label"
-          :request-id="bannerId.value"
-          :template-key="selectedTemplate.value"
-          :logo-size="logoSize"
+          :request-id="id.value"
+          :template-key="template.value"
+          :logo-size="logo.size"
         />
         <div v-if="item.key === 'background'" class="space-y-3">
           <BackgroundSection

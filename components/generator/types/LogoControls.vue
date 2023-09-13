@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useDefaultStore } from '~/stores/defaults'
 import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore()
-const { logoSize, logoXOffset } = storeToRefs(store)
+const defaults = useDefaultStore()
+const resource = storeToRefs(defaults).resource
+
+const { logo } = resource.value!
+
 </script>
 
 <script lang="ts">
@@ -16,7 +19,7 @@ export default {
 <template>
   <div class="flex">
     <FormInput
-      v-model="logoSize"
+      v-model="logo.size"
       name="logoSize"
       label="Size"
       type="number"
@@ -24,7 +27,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="logoXOffset"
+      v-model="logo.x"
       name="logoXOffset"
       label="X Offset"
       type="number"

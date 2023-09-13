@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useDefaultStore } from '~/stores/defaults'
 import { useConstantStore } from '~/stores/constants'
 import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore()
+const defaults = useDefaultStore()
 const constants = useConstantStore()
-const { uXOffset, uYOffset, uFontSize, uFontBold, uTextAlignment, uFontFace } =
-  storeToRefs(store)
+
+const resource = storeToRefs(defaults).resource
+
+const { updated } = resource.value!
 
 const alignments = constants.alignments
 const fonts = constants.fontFaces
@@ -22,7 +24,7 @@ export default {
 <template>
   <div class="flex flex-row mb-4 w-full">
     <FormInput
-      v-model="uXOffset"
+      v-model="updated.x"
       name="xoffset"
       label="X Offset"
       type="number"
@@ -30,7 +32,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="uYOffset"
+      v-model="updated.y"
       name="yoffset"
       label="Y Offset"
       type="number"
@@ -38,7 +40,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="uFontSize"
+      v-model="updated.font_size"
       name="fontsize"
       label="Font Size"
       type="number"
@@ -46,19 +48,20 @@ export default {
       trail-text="px"
     />
     <UFormGroup label="Bold" name="bold">
-      <UToggle v-model="uFontBold" />
+      <UToggle v-model="updated.font_bold" />
     </UFormGroup>
   </div>
   <div class="flex flex-row space-x-4">
     <UFormGroup label="Text Alignment" name="alignment">
       <USelect
-        v-model="uTextAlignment"
+        v-model="updated.text_align"
+        value-attribute="key"
         :options="alignments"
         option-attribute="value"
       />
     </UFormGroup>
     <UFormGroup label="Font Face" name="font">
-      <USelect v-model="uFontFace" :options="fonts" option-attribute="value" />
+      <USelect v-model="updated.font_face" value-attribute="key" :options="fonts" option-attribute="value" />
     </UFormGroup>
   </div>
 </template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useDefaultStore } from '~/stores/defaults'
 import ConfigureStep from '~/components/generator/steps/ConfigureStep.vue'
 
-const store = useBannerDetailsStore()
+const defaults = useDefaultStore()
 
-const { bannerId, bannerPlatform } = storeToRefs(store)
+const { id, platform } = storeToRefs(defaults)
 
 const items = [
   {
@@ -89,7 +89,7 @@ function copyToClipboard () {
 }
 
 async function save (type: string) {
-  const saved = await store.saveBanner(type)
+  const saved = await defaults.save(type)
   if (saved.mnemonic) {
     mnemonic.value = saved.mnemonic
     isOpen.value = true
@@ -101,15 +101,15 @@ const computedResultUrl: ComputedRef<string> = computed(() => {
 })
 
 async function onSubmit (form: any) {
-  const id = form.id
-  const platform = getPlatformKey(form.platform)
+  const bannerId = form.id
+  const platformName = getPlatformKey(form.platform)
   const data = await fetch(
-    `https://api.mcbanners.com/banner/resource/${platform}/${id}/isValid`
+    `https://api.mcbanners.com/banner/resource/${platformName}/${bannerId}/isValid`
   )
   const json = await data.json()
   if (json.valid) {
-    bannerId.value = id
-    bannerPlatform.value = platform!
+    id.value = bannerId
+    platform.value = platformName!
     items[1].disabled = false
     index.value = 1
     items[0].disabled = true
@@ -194,7 +194,7 @@ async function onSubmit (form: any) {
               </template>
               <!-- Content -->
               <img
-                :alt="`Banner for ${bannerId.value}`"
+                :alt="`Banner for ${id.value}`"
                 :src="computedResultUrl"
                 width="300"
                 height="100"

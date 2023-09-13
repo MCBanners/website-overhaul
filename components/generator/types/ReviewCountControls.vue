@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useDefaultStore } from '~/stores/defaults'
 import { useConstantStore } from '~/stores/constants'
 import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore()
+const defaults = useDefaultStore()
 const constants = useConstantStore()
-const { revXOffset, revYOffset, revFontSize, revFontBold, revTextAlignment, revFontFace } =
-  storeToRefs(store)
+
+const resource = storeToRefs(defaults).resource
+
+const { reviews } = resource.value!
 
 const alignments = constants.alignments
 const fonts = constants.fontFaces
@@ -22,7 +24,7 @@ export default {
 <template>
   <div class="flex flex-row mb-4 w-full">
     <FormInput
-      v-model="revXOffset"
+      v-model="reviews.x"
       name="xoffset"
       label="X Offset"
       type="number"
@@ -30,7 +32,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="revYOffset"
+      v-model="reviews.y"
       name="yoffset"
       label="Y Offset"
       type="number"
@@ -38,7 +40,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="revFontSize"
+      v-model="reviews.font_size"
       name="fontsize"
       label="Font Size"
       type="number"
@@ -46,19 +48,20 @@ export default {
       trail-text="px"
     />
     <UFormGroup label="Bold" name="bold">
-      <UToggle v-model="revFontBold" />
+      <UToggle v-model="reviews.font_bold" />
     </UFormGroup>
   </div>
   <div class="flex flex-row space-x-4">
     <UFormGroup label="Text Alignment" name="alignment">
       <USelect
-        v-model="revTextAlignment"
+        v-model="reviews.text_align"
+        value-attribute="key"
         :options="alignments"
         option-attribute="value"
       />
     </UFormGroup>
     <UFormGroup label="Font Face" name="font">
-      <USelect v-model="revFontFace" :options="fonts" option-attribute="value" />
+      <USelect v-model="reviews.font_face" value-attribute="key" :options="fonts" option-attribute="value" />
     </UFormGroup>
   </div>
 </template>

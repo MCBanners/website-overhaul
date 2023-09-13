@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useBannerDetailsStore } from '~/stores/bannerDetails'
+import { useDefaultStore } from '~/stores/defaults'
 import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
-const store = useBannerDetailsStore()
-const { starXOffset, starYOffset, starGap } = storeToRefs(store)
+const defaults = useDefaultStore()
+
+const resource = storeToRefs(defaults).resource
+
+const { stars } = resource.value!
 </script>
 
 <script lang="ts">
@@ -16,7 +19,7 @@ export default {
 <template>
   <div class="flex">
     <FormInput
-      v-model="starXOffset"
+      v-model="stars.x"
       name="starXOffset"
       label="X Offset"
       type="number"
@@ -24,7 +27,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="starYOffset"
+      v-model="stars.y"
       name="starYOffset"
       label="Y Offset"
       type="number"
@@ -32,7 +35,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="starGap"
+      v-model="stars.gap"
       name="starGap"
       label="Gap"
       type="number"
