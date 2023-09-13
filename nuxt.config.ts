@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@pinia/nuxt"],
+  modules: ['@nuxt/ui', '@pinia/nuxt'],
   experimental: {
-    viewTransition: true,
+    viewTransition: true
   },
   ui: {
-    icons: ["heroicons", "simple-icons"],
-  },
-});
+    icons: ['heroicons', 'simple-icons']
+  }
+})
