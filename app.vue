@@ -12,6 +12,7 @@ await defaults.getDefaults()
 <template>
   <div class="bg-gray-100 dark:bg-gray-900 h-screen">
     <NuxtLayout>
+      <SeoKit />
       <NuxtPage />
     </NuxtLayout>
     <UNotifications />
