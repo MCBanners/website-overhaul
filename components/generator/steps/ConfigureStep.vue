@@ -10,14 +10,17 @@ import StarSection from '~/components/generator/sections/StarSection.vue'
 import DownloadCountSection from '~/components/generator/sections/DownloadCountSection.vue'
 import UpdatedTimeSection from '~/components/generator/sections/UpdatedTimeSection.vue'
 import PriceSection from '~/components/generator/sections/PriceSection.vue'
+import ResourceCountSection from '~/components/generator/sections/ResourceCountSection.vue'
+import LikeCountSection from '~/components/generator/sections/LikeCountSection.vue'
 
 const defaults = useDefaultStore()
 
-const { id, platform, template } = storeToRefs(defaults)
+const { id, platform, template, type } = storeToRefs(defaults)
 
 const resource = storeToRefs(defaults).resource
+const author = storeToRefs(defaults).author
 
-const { logo } = resource.value!
+const { logo } = type.value === 'resource' ? resource.value! : author.value!
 
 const configureItems = [
   {
@@ -29,6 +32,16 @@ const configureItems = [
     key: 'resourceLogo',
     label: 'Resource Logo',
     description: 'Logo Configuration'
+  },
+  {
+    key: 'authorLogo',
+    label: 'Author Logo',
+    description: 'Logo Configuration'
+  },
+  {
+    key: 'resourceCount',
+    label: 'Resource Count',
+    description: 'Resource Count Configuration'
   },
   {
     key: 'resourceName',
@@ -46,9 +59,24 @@ const configureItems = [
     description: 'Change the review count of your banner.'
   },
   {
+    key: 'viewCount',
+    label: 'View Count',
+    description: 'View Count Configuration.'
+  },
+  {
     key: 'starredCount',
     label: 'Star Count',
     description: 'Change the star count of your banner.'
+  },
+  {
+    key: 'followersCount',
+    label: 'Follower Count',
+    description: 'Change the follower count of your banner.'
+  },
+  {
+    key: 'starsCount',
+    label: 'Stars Count',
+    description: 'Star Count Configuration.'
   },
   {
     key: 'lastUpdated',
@@ -72,73 +100,134 @@ const configureItems = [
   }
 ]
 
-const platformSectionConfig: Record<string, string[]> = {
-  spigot: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'reviewCount',
-    'stars',
-    'downloadCount',
-    'price'
-  ],
-  ore: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'reviewCount',
-    'downloadCount'
-  ],
-  curseforge: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'lastUpdated',
-    'downloadCount'
-  ],
-  modrinth: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'lastUpdated',
-    'downloadCount'
-  ],
-  builtbybit: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'reviewCount',
-    'stars',
-    'downloadCount',
-    'price'
-  ],
-  polymart: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'reviewCount',
-    'stars',
-    'downloadCount',
-    'price'
-  ],
-  hangar: [
-    'background',
-    'resourceLogo',
-    'resourceName',
-    'authorName',
-    'starredCount',
-    'downloadCount'
-  ]
+const platformSectionConfig: Record<string, Record<string, string[]>> = {
+  resource: {
+    spigot: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'reviewCount',
+      'stars',
+      'downloadCount',
+      'price'
+    ],
+    ore: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'reviewCount',
+      'downloadCount'
+    ],
+    curseforge: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'lastUpdated',
+      'downloadCount'
+    ],
+    modrinth: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'lastUpdated',
+      'downloadCount'
+    ],
+    builtbybit: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'reviewCount',
+      'stars',
+      'downloadCount',
+      'price'
+    ],
+    polymart: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'reviewCount',
+      'stars',
+      'downloadCount',
+      'price'
+    ],
+    hangar: [
+      'background',
+      'resourceLogo',
+      'resourceName',
+      'authorName',
+      'starredCount',
+      'downloadCount'
+    ]
+  },
+  author: {
+    spigot: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'likesCount',
+      'reviewCount',
+      'downloadCount'
+    ],
+    ore: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'likesCount',
+      'downloadCount'
+    ],
+    curseforge: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'downloadCount'
+    ],
+    modrinth: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'followersCount',
+      'downloadCount'
+    ],
+    builtbybit: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'reviewCount',
+      'downloadCount'
+    ],
+    polymart: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'reviewCount',
+      'downloadCount'
+    ],
+    hangar: [
+      'background',
+      'authorLogo',
+      'authorName',
+      'resourceCount',
+      'starsCount',
+      'viewCount',
+      'downloadCount'
+    ]
+  }
 }
 
 const filteredItems = computed(() => {
-  const sectionsToShow = platformSectionConfig[platform.value] || []
+  const sectionsToShow = platformSectionConfig[type.value][platform.value] || []
   return configureItems.filter(item => sectionsToShow.includes(item.key))
 })
 </script>
@@ -173,7 +262,7 @@ export default {
             :description="item.description"
           />
         </div>
-        <div v-if="item.key === 'resourceLogo'" class="space-y-3">
+        <div v-if="item.key === 'resourceLogo' || item.key === 'authorLogo'" class="space-y-3">
           <LogoSection :label="item.label" :description="item.description" />
         </div>
         <div v-if="item.key === 'resourceName'" class="space-y-3">
@@ -188,7 +277,7 @@ export default {
             :description="item.description"
           />
         </div>
-        <div v-if="item.key === 'reviewCount' || item.key === 'starredCount'" class="space-y-3">
+        <div v-if="item.key === 'reviewCount' || item.key === 'starredCount' || item.key === 'viewCount'" class="space-y-3">
           <ReviewCountSection
             :label="item.label"
             :description="item.description"
@@ -211,6 +300,12 @@ export default {
         </div>
         <div v-if="item.key === 'price'" class="space-y-3">
           <PriceSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'resourceCount'" class="space-y-3">
+          <ResourceCountSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'followersCount' || item.key === 'starsCount'" class="space-y-3">
+          <LikeCountSection :label="item.label" :description="item.description" />
         </div>
       </div>
     </template>

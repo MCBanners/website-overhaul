@@ -7,9 +7,12 @@ import FormInput from '~/components/generator/types/raw/FormInput.vue'
 const defaults = useDefaultStore()
 const constants = useConstantStore()
 
-const resource = storeToRefs(defaults).resource
+const { type } = storeToRefs(defaults)
 
-const { reviews } = resource.value!
+const resource = storeToRefs(defaults).resource
+const author = storeToRefs(defaults).author
+
+const { reviews } = type.value === 'resource' ? resource.value! : author.value!
 
 const alignments = constants.alignments
 const fonts = constants.fontFaces

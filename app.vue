@@ -6,7 +6,7 @@ const constants = useConstantStore()
 const defaults = useDefaultStore()
 
 await constants.getConstants()
-await defaults.getResource()
+await defaults.getDefaults()
 </script>
 
 <template>

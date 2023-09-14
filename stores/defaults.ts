@@ -1,28 +1,31 @@
 import { defineStore } from 'pinia'
 import { useConstantStore } from './constants'
-import { Resource } from '~/types/banner'
+import { Resource, Author } from '~/types/banner'
 import { BannerSaveResponse } from '~/types/misc'
 
 export const useDefaultStore = defineStore('defaults', () => {
   const id = ref('0')
   const platform = ref('spigot')
   const template = ref('Moonlight Purple')
+  const type = ref('resource')
 
   const resource = ref<Resource>()
+  const author = ref<Author>()
 
-  const getResource = async () => {
+  const getDefaults = async () => {
     if (resource.value) { return }
     const defaults = await fetch(
       'https://api.mcbanners.com/banner/svc/defaults/all'
     )
     const defaultsJson = await defaults.json()
     resource.value = defaultsJson.resource
+    author.value = defaultsJson.author
   }
 
   function convertToQueryParameters (): string {
     const queryParams: string[] = []
 
-    for (const [key, value] of Object.entries(resource.value!)) {
+    for (const [key, value] of Object.entries(type.value === 'resource' ? resource.value! : author.value!)) {
       if (typeof value === 'object') {
         for (const [subKey, subValue] of Object.entries(value)) {
           if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
@@ -41,39 +44,42 @@ export const useDefaultStore = defineStore('defaults', () => {
   }
 
   function generateBannerUrl (): string {
-    return `https://api.mcbanners.com/banner/resource/${platform.value}/${id.value}/banner.png?${convertToQueryParameters()}`
+    return `https://api.mcbanners.com/banner/${type.value}/${platform.value}/${id.value}/banner.png?${convertToQueryParameters()}`
   }
 
-  async function save (type: string): Promise<BannerSaveResponse> {
+  async function save (bannerType: string): Promise<BannerSaveResponse> {
     const constants = useConstantStore()
 
     const data: {
       type: string;
       metadata: {
-        resource_id: string;
+        resource_id?: string;
+        author_id?: string;
       };
       settings: Record<string, any>;
     } = {
-      type,
-      metadata: {
-        resource_id: id.value
-      },
+      type: bannerType,
+      metadata: {},
       settings: {}
     }
 
-    if (resource.value) {
-      for (const [key, value] of Object.entries(resource.value)) {
-        if (typeof value === 'object') {
-          for (const [subKey, subValue] of Object.entries(value)) {
-            if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
-              data.settings[`${key}__${subKey}`] = subValue
-            } else if (key === 'background' && typeof subValue === 'string') {
-              data.settings[`${key}__${subKey}`] = getTemplateKey(template.value, constants.templates)
-            }
+    if (type.value === 'resource') {
+      data.metadata.resource_id = id.value
+    } else {
+      data.metadata.author_id = id.value
+    }
+
+    for (const [key, value] of Object.entries(type.value === 'resource' ? resource.value! : author.value!)) {
+      if (typeof value === 'object') {
+        for (const [subKey, subValue] of Object.entries(value)) {
+          if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
+            data.settings[`${key}__${subKey}`] = subValue
+          } else if (key === 'background' && typeof subValue === 'string') {
+            data.settings[`${key}__${subKey}`] = getTemplateKey(template.value, constants.templates)
           }
-        } else {
-          data.settings[key] = value
         }
+      } else {
+        data.settings[key] = value
       }
     }
 
@@ -97,8 +103,10 @@ export const useDefaultStore = defineStore('defaults', () => {
     id,
     platform,
     template,
+    type,
     resource,
-    getResource,
+    author,
+    getDefaults,
     convertToQueryParameters,
     generateBannerUrl,
     save

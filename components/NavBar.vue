@@ -15,6 +15,11 @@
                   Resource Banners
                 </h5>
               </NuxtLink>
+              <NuxtLink to="/authors">
+                <h5 class="font-bold mb-0 ml-4">
+                  Author Banners
+                </h5>
+              </NuxtLink>
             </div>
           </div>
           <ColorModeButton />

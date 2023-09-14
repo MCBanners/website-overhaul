@@ -7,12 +7,9 @@ import FormInput from '~/components/generator/types/raw/FormInput.vue'
 const defaults = useDefaultStore()
 const constants = useConstantStore()
 
-const { type } = storeToRefs(defaults)
-
-const resource = storeToRefs(defaults).resource
 const author = storeToRefs(defaults).author
 
-const { author_name } = type.value === 'resource' ? resource.value! : author.value!
+const { likes } = author.value!
 
 const alignments = constants.alignments
 const fonts = constants.fontFaces
@@ -20,14 +17,14 @@ const fonts = constants.fontFaces
 
 <script lang="ts">
 export default {
-  name: 'AuthorNameControls'
+  name: 'LikeCountControls'
 }
 </script>
 
 <template>
   <div class="flex flex-row mb-4 w-full">
     <FormInput
-      v-model="author_name.x"
+      v-model="likes.x"
       name="xoffset"
       label="X Offset"
       type="number"
@@ -35,7 +32,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="author_name.y"
+      v-model="likes.y"
       name="yoffset"
       label="Y Offset"
       type="number"
@@ -43,7 +40,7 @@ export default {
       trail-text="px"
     />
     <FormInput
-      v-model="author_name.font_size"
+      v-model="likes.font_size"
       name="fontsize"
       label="Font Size"
       type="number"
@@ -51,20 +48,20 @@ export default {
       trail-text="px"
     />
     <UFormGroup label="Bold" name="bold">
-      <UToggle v-model="author_name.font_bold" />
+      <UToggle v-model="likes.font_bold" />
     </UFormGroup>
   </div>
   <div class="flex flex-row space-x-4">
     <UFormGroup label="Text Alignment" name="alignment">
       <USelect
-        v-model="author_name.text_align"
+        v-model="likes.text_align"
         value-attribute="key"
         :options="alignments"
         option-attribute="value"
       />
     </UFormGroup>
     <UFormGroup label="Font Face" name="font">
-      <USelect v-model="author_name.font_face" value-attribute="key" :options="fonts" option-attribute="value" />
+      <USelect v-model="likes.font_face" value-attribute="key" :options="fonts" option-attribute="value" />
     </UFormGroup>
   </div>
 </template>

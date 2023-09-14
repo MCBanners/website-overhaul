@@ -4,9 +4,13 @@ import { useDefaultStore } from '~/stores/defaults'
 import FormInput from '~/components/generator/types/raw/FormInput.vue'
 
 const defaults = useDefaultStore()
-const resource = storeToRefs(defaults).resource
 
-const { logo } = resource.value!
+const { type } = storeToRefs(defaults)
+
+const resource = storeToRefs(defaults).resource
+const author = storeToRefs(defaults).author
+
+const { logo } = type.value === 'resource' ? resource.value! : author.value!
 
 </script>
 

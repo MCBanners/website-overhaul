@@ -7,15 +7,15 @@ const defaults = useDefaultStore()
 
 const { id, platform, type } = storeToRefs(defaults)
 
-type.value = 'resource'
+type.value = 'author'
 
 const items = [
   {
     key: 'details',
-    label: 'Resource Details',
+    label: 'Author Details',
     disabled: false,
     description:
-      'Enter the Resource ID that you want to generate a banner for.'
+      'Enter the Author ID that you want to generate a banner for.'
   },
   {
     key: 'configure',
@@ -30,37 +30,37 @@ const platforms = [
   {
     key: 'spigot',
     value: 'Spigot',
-    type: 'SPIGOT_RESOURCE'
+    type: 'SPIGOT_AUTHOR'
   },
   {
     key: 'ore',
     value: 'Sponge',
-    type: 'SPONGE_RESOURCE'
+    type: 'SPONGE_AUTHOR'
   },
   {
     key: 'curseforge',
     value: 'CurseForge',
-    type: 'CURSEFORGE_RESOURCE'
+    type: 'CURSEFORGE_AUTHOR'
   },
   {
     key: 'modrinth',
     value: 'Modrinth',
-    type: 'MODRINTH_RESOURCE'
+    type: 'MODRINTH_AUTHOR'
   },
   {
     key: 'builtbybit',
     value: 'BuiltByBit',
-    type: 'BUILTBYBIT_RESOURCE'
+    type: 'BUILTBYBIT_AUTHOR'
   },
   {
     key: 'polymart',
     value: 'Polymart',
-    type: 'POLYMART_RESOURCE'
+    type: 'POLYMART_AUTHOR'
   },
   {
     key: 'hangar',
     value: 'Hangar',
-    type: 'HANGAR_RESOURCE'
+    type: 'HANGAR_AUTHOR'
   }
 ]
 
@@ -72,11 +72,11 @@ const toast = useToast()
 const isOpen = ref(false)
 const mnemonic = ref('')
 
-function getPlatformKey (value: string) {
+function getPlatformKey (value: string): string | undefined {
   return platforms.find(platform => platform.value === value)?.key
 }
 
-function getPlatformType (value: string) {
+function getPlatformType (value: string): string | undefined {
   return platforms.find(platform => platform.value === value)?.type
 }
 
@@ -106,7 +106,7 @@ async function onSubmit (form: any) {
   const bannerId = form.id
   const platformName = getPlatformKey(form.platform)
   const data = await fetch(
-    `https://api.mcbanners.com/banner/resource/${platformName}/${bannerId}/isValid`
+    `https://api.mcbanners.com/banner/author/${platformName}/${bannerId}/isValid`
   )
   const json = await data.json()
   if (json.valid) {
@@ -121,7 +121,7 @@ async function onSubmit (form: any) {
       id: 'fetch_failed',
       title: 'Error!',
       description:
-        'Failed to fetch resource. Check that the resource ID is correct.',
+        'Failed to fetch resource. Check that the author ID is correct.',
       timeout: 3000
     })
   }
@@ -148,7 +148,7 @@ async function onSubmit (form: any) {
         <div v-if="item.key === 'details'" class="space-y-3">
           <UAlert
             icon="i-heroicons-command-line"
-            description="While we refer to it as a resource ID, it can also be a slug or project ID based on the platform."
+            description="While we refer to it as a author ID, it can also be a slug or name based on the platform."
             title="Heads Up"
             color="primary"
             variant="outline"
@@ -161,7 +161,7 @@ async function onSubmit (form: any) {
               option-attribute="value"
             />
           </UFormGroup>
-          <UFormGroup label="Resource ID" name="id">
+          <UFormGroup label="Author ID" name="id">
             <UInput v-model="idForm.id" />
           </UFormGroup>
         </div>

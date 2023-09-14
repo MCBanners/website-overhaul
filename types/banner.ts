@@ -37,3 +37,13 @@ export type Resource = {
     resource_name: Layout;
     updated: Layout;
 }
+
+export type Author = {
+    author_name: Layout;
+    reviews: Layout;
+    downloads: Layout;
+    background: Background;
+    logo: Logo;
+    resource_count: Layout;
+    likes: Layout;
+}
