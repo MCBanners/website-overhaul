@@ -9,8 +9,19 @@ const { type } = storeToRefs(defaults)
 
 const resource = storeToRefs(defaults).resource
 const author = storeToRefs(defaults).author
+const server = storeToRefs(defaults).server
 
-const { logo } = type.value === 'resource' ? resource.value! : author.value!
+const using = computed(() => {
+  if (type.value === 'resource') {
+    return resource.value!
+  } else if (type.value === 'author') {
+    return author.value!
+  } else {
+    return server.value!
+  }
+})
+
+const { logo } = using.value
 
 </script>
 

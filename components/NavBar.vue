@@ -12,12 +12,17 @@
               </NuxtLink>
               <NuxtLink to="/resources">
                 <h5 class="font-bold mb-0 ml-4">
-                  Resource Banners
+                  Resources
                 </h5>
               </NuxtLink>
               <NuxtLink to="/authors">
                 <h5 class="font-bold mb-0 ml-4">
-                  Author Banners
+                  Authors
+                </h5>
+              </NuxtLink>
+              <NuxtLink to="/servers">
+                <h5 class="font-bold mb-0 ml-4">
+                  Servers
                 </h5>
               </NuxtLink>
             </div>

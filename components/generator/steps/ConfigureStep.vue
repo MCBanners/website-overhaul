@@ -15,12 +15,23 @@ import LikeCountSection from '~/components/generator/sections/LikeCountSection.v
 
 const defaults = useDefaultStore()
 
-const { id, platform, template, type } = storeToRefs(defaults)
+const { id, platform, template, type, host, port } = storeToRefs(defaults)
 
 const resource = storeToRefs(defaults).resource
 const author = storeToRefs(defaults).author
+const server = storeToRefs(defaults).server
 
-const { logo } = type.value === 'resource' ? resource.value! : author.value!
+const using = computed(() => {
+  if (type.value === 'resource') {
+    return resource.value!
+  } else if (type.value === 'author') {
+    return author.value!
+  } else {
+    return server.value!
+  }
+})
+
+const { logo } = using.value
 
 const configureItems = [
   {
@@ -36,6 +47,11 @@ const configureItems = [
   {
     key: 'authorLogo',
     label: 'Author Logo',
+    description: 'Logo Configuration'
+  },
+  {
+    key: 'serverLogo',
+    label: 'Server Logo',
     description: 'Logo Configuration'
   },
   {
@@ -226,8 +242,20 @@ const platformSectionConfig: Record<string, Record<string, string[]>> = {
   }
 }
 
+const serverSectionConfig = [
+  'background',
+  'serverLogo'
+]
+
 const filteredItems = computed(() => {
-  const sectionsToShow = platformSectionConfig[type.value][platform.value] || []
+  let sectionsToShow: string | string[] = []
+
+  if (type.value === 'server') {
+    sectionsToShow = serverSectionConfig
+  } else {
+    sectionsToShow = platformSectionConfig[type.value][platform.value] || []
+  }
+
   return configureItems.filter(item => sectionsToShow.includes(item.key))
 })
 </script>
@@ -262,7 +290,7 @@ export default {
             :description="item.description"
           />
         </div>
-        <div v-if="item.key === 'resourceLogo' || item.key === 'authorLogo'" class="space-y-3">
+        <div v-if="item.key === 'resourceLogo' || item.key === 'authorLogo' || item.key === 'serverLogo'" class="space-y-3">
           <LogoSection :label="item.label" :description="item.description" />
         </div>
         <div v-if="item.key === 'resourceName'" class="space-y-3">
