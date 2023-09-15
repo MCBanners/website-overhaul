@@ -121,7 +121,7 @@ async function onSubmit (form: any) {
       id: 'fetch_failed',
       title: 'Error!',
       description:
-        'Failed to fetch resource. Check that the author ID is correct.',
+        'Failed to fetch author. Check that the author ID is correct.',
       timeout: 3000
     })
   }
