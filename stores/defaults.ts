@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useConstantStore } from './constants'
-import { Resource, Author } from '~/types/banner'
+import { Resource, Author, Server } from '~/types/banner'
 import { BannerSaveResponse } from '~/types/misc'
 
 export const useDefaultStore = defineStore('defaults', () => {
@@ -9,8 +9,12 @@ export const useDefaultStore = defineStore('defaults', () => {
   const template = ref('Moonlight Purple')
   const type = ref('resource')
 
+  const host = ref('localhost')
+  const port = ref(25565)
+
   const resource = ref<Resource>()
   const author = ref<Author>()
+  const server = ref<Server>()
 
   const getDefaults = async () => {
     if (resource.value) { return }
@@ -20,15 +24,30 @@ export const useDefaultStore = defineStore('defaults', () => {
     const defaultsJson = await defaults.json()
     resource.value = defaultsJson.resource
     author.value = defaultsJson.author
+    server.value = defaultsJson.server
   }
 
   function convertToQueryParameters (): string {
     const queryParams: string[] = []
 
-    for (const [key, value] of Object.entries(type.value === 'resource' ? resource.value! : author.value!)) {
+    let using: Record<string, any> = {}
+
+    switch (type.value) {
+      case 'resource':
+        using = resource.value!
+        break
+      case 'author':
+        using = author.value!
+        break
+      case 'server':
+        using = server.value!
+        break
+    }
+
+    for (const [key, value] of Object.entries(using)) {
       if (typeof value === 'object') {
         for (const [subKey, subValue] of Object.entries(value)) {
-          if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
+          if (key !== 'background') {
             queryParams.push(`${key}__${subKey}=${subValue}`)
           } else if (key === 'background' && typeof subValue === 'string') {
             const constants = useConstantStore()
@@ -44,17 +63,35 @@ export const useDefaultStore = defineStore('defaults', () => {
   }
 
   function generateBannerUrl (): string {
-    return `https://api.mcbanners.com/banner/${type.value}/${platform.value}/${id.value}/banner.png?${convertToQueryParameters()}`
+    const regularUrl = `https://api.mcbanners.com/banner/${type.value}/${platform.value}/${id.value}/banner.png?${convertToQueryParameters()}`
+    const serverUrl = `https://api.mcbanners.com/banner/server/${host.value}/${port.value}/banner.png?${convertToQueryParameters()}`
+
+    return type.value === 'server' ? serverUrl : regularUrl
   }
 
   async function save (bannerType: string): Promise<BannerSaveResponse> {
     const constants = useConstantStore()
 
+    let using: Record<string, any> = {}
+
+    switch (type.value) {
+      case 'resource':
+        using = resource.value!
+        break
+      case 'author':
+        using = author.value!
+        break
+      case 'server':
+        using = server.value!
+        break
+    }
     const data: {
       type: string;
       metadata: {
         resource_id?: string;
         author_id?: string;
+        server_host?: string;
+        server_port?: number;
       };
       settings: Record<string, any>;
     } = {
@@ -65,14 +102,17 @@ export const useDefaultStore = defineStore('defaults', () => {
 
     if (type.value === 'resource') {
       data.metadata.resource_id = id.value
-    } else {
+    } else if (type.value === 'author') {
       data.metadata.author_id = id.value
+    } else {
+      data.metadata.server_host = host.value
+      data.metadata.server_port = port.value
     }
 
-    for (const [key, value] of Object.entries(type.value === 'resource' ? resource.value! : author.value!)) {
+    for (const [key, value] of Object.entries(using)) {
       if (typeof value === 'object') {
         for (const [subKey, subValue] of Object.entries(value)) {
-          if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
+          if (key !== 'background') {
             data.settings[`${key}__${subKey}`] = subValue
           } else if (key === 'background' && typeof subValue === 'string') {
             data.settings[`${key}__${subKey}`] = getTemplateKey(template.value, constants.templates)
@@ -104,8 +144,11 @@ export const useDefaultStore = defineStore('defaults', () => {
     platform,
     template,
     type,
+    host,
+    port,
     resource,
     author,
+    server,
     getDefaults,
     convertToQueryParameters,
     generateBannerUrl,

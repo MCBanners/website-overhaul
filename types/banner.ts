@@ -47,3 +47,12 @@ export type Author = {
     resource_count: Layout;
     likes: Layout;
 }
+
+export type Server = {
+    server_name: Layout;
+    motd: Layout;
+    background: Background;
+    players: Layout;
+    logo: Logo;
+    version: Layout;
+}

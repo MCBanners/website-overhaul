@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import ServerNameSection from '../sections/server/ServerNameSection.vue'
+import ServerVersionSection from '../sections/server/ServerVersionSection.vue'
+import ServerMotdSection from '../sections/server/ServerMotdSection.vue'
+import ServerPlayerCountSection from '../sections/server/ServerPlayerCountSection.vue'
 import { useDefaultStore } from '~/stores/defaults'
 import BackgroundSection from '~/components/generator/sections/BackgroundSection.vue'
 import LogoSection from '~/components/generator/sections/LogoSection.vue'
@@ -19,8 +23,19 @@ const { id, platform, template, type } = storeToRefs(defaults)
 
 const resource = storeToRefs(defaults).resource
 const author = storeToRefs(defaults).author
+const server = storeToRefs(defaults).server
 
-const { logo } = type.value === 'resource' ? resource.value! : author.value!
+const using = computed(() => {
+  if (type.value === 'resource') {
+    return resource.value!
+  } else if (type.value === 'author') {
+    return author.value!
+  } else {
+    return server.value!
+  }
+})
+
+const { logo } = using.value
 
 const configureItems = [
   {
@@ -39,6 +54,11 @@ const configureItems = [
     description: 'Logo Configuration'
   },
   {
+    key: 'serverLogo',
+    label: 'Server Logo',
+    description: 'Logo Configuration'
+  },
+  {
     key: 'resourceCount',
     label: 'Resource Count',
     description: 'Resource Count Configuration'
@@ -52,6 +72,11 @@ const configureItems = [
     key: 'authorName',
     label: 'Author Name',
     description: 'Change the author name of your banner.'
+  },
+  {
+    key: 'serverName',
+    label: 'Server Name',
+    description: 'Name Configuration'
   },
   {
     key: 'reviewCount',
@@ -97,6 +122,21 @@ const configureItems = [
     key: 'price',
     label: 'Price',
     description: 'Change the price of your banner.'
+  },
+  {
+    key: 'serverVersion',
+    label: 'Server Version',
+    description: 'Change the server version of your banner.'
+  },
+  {
+    key: 'serverMotd',
+    label: 'MOTD',
+    description: 'Change the MOTD of your banner.'
+  },
+  {
+    key: 'serverPlayerCount',
+    label: 'Player Count',
+    description: 'Change the player count of your banner.'
   }
 ]
 
@@ -226,8 +266,24 @@ const platformSectionConfig: Record<string, Record<string, string[]>> = {
   }
 }
 
+const serverSectionConfig = [
+  'background',
+  'serverLogo',
+  'serverName',
+  'serverVersion',
+  'serverMotd',
+  'serverPlayerCount'
+]
+
 const filteredItems = computed(() => {
-  const sectionsToShow = platformSectionConfig[type.value][platform.value] || []
+  let sectionsToShow: string | string[] = []
+
+  if (type.value === 'server') {
+    sectionsToShow = serverSectionConfig
+  } else {
+    sectionsToShow = platformSectionConfig[type.value][platform.value] || []
+  }
+
   return configureItems.filter(item => sectionsToShow.includes(item.key))
 })
 </script>
@@ -262,7 +318,7 @@ export default {
             :description="item.description"
           />
         </div>
-        <div v-if="item.key === 'resourceLogo' || item.key === 'authorLogo'" class="space-y-3">
+        <div v-if="item.key === 'resourceLogo' || item.key === 'authorLogo' || item.key === 'serverLogo'" class="space-y-3">
           <LogoSection :label="item.label" :description="item.description" />
         </div>
         <div v-if="item.key === 'resourceName'" class="space-y-3">
@@ -306,6 +362,18 @@ export default {
         </div>
         <div v-if="item.key === 'followersCount' || item.key === 'starsCount'" class="space-y-3">
           <LikeCountSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverName'" class="space-y-3">
+          <ServerNameSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverVersion'" class="space-y-3">
+          <ServerVersionSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverMotd'" class="space-y-3">
+          <ServerMotdSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverPlayerCount'" class="space-y-3">
+          <ServerPlayerCountSection :label="item.label" :description="item.description" />
         </div>
       </div>
     </template>
