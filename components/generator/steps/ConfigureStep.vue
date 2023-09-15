@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import ServerNameSection from '../sections/server/ServerNameSection.vue'
+import ServerVersionSection from '../sections/server/ServerVersionSection.vue'
 import { useDefaultStore } from '~/stores/defaults'
 import BackgroundSection from '~/components/generator/sections/BackgroundSection.vue'
 import LogoSection from '~/components/generator/sections/LogoSection.vue'
@@ -70,6 +72,11 @@ const configureItems = [
     description: 'Change the author name of your banner.'
   },
   {
+    key: 'serverName',
+    label: 'Server Name',
+    description: 'Name Configuration'
+  },
+  {
     key: 'reviewCount',
     label: 'Review Count',
     description: 'Change the review count of your banner.'
@@ -113,6 +120,11 @@ const configureItems = [
     key: 'price',
     label: 'Price',
     description: 'Change the price of your banner.'
+  },
+  {
+    key: 'serverVersion',
+    label: 'Server Version',
+    description: 'Change the server version of your banner.'
   }
 ]
 
@@ -244,7 +256,9 @@ const platformSectionConfig: Record<string, Record<string, string[]>> = {
 
 const serverSectionConfig = [
   'background',
-  'serverLogo'
+  'serverLogo',
+  'serverName',
+  'serverVersion'
 ]
 
 const filteredItems = computed(() => {
@@ -334,6 +348,12 @@ export default {
         </div>
         <div v-if="item.key === 'followersCount' || item.key === 'starsCount'" class="space-y-3">
           <LikeCountSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverName'" class="space-y-3">
+          <ServerNameSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverVersion'" class="space-y-3">
+          <ServerVersionSection :label="item.label" :description="item.description" />
         </div>
       </div>
     </template>
