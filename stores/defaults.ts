@@ -47,7 +47,7 @@ export const useDefaultStore = defineStore('defaults', () => {
     for (const [key, value] of Object.entries(using)) {
       if (typeof value === 'object') {
         for (const [subKey, subValue] of Object.entries(value)) {
-          if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
+          if (key !== 'background') {
             queryParams.push(`${key}__${subKey}=${subValue}`)
           } else if (key === 'background' && typeof subValue === 'string') {
             const constants = useConstantStore()
@@ -112,7 +112,7 @@ export const useDefaultStore = defineStore('defaults', () => {
     for (const [key, value] of Object.entries(using)) {
       if (typeof value === 'object') {
         for (const [subKey, subValue] of Object.entries(value)) {
-          if (subKey !== 'max_chars' && subKey !== 'enable' && key !== 'background') {
+          if (key !== 'background') {
             data.settings[`${key}__${subKey}`] = subValue
           } else if (key === 'background' && typeof subValue === 'string') {
             data.settings[`${key}__${subKey}`] = getTemplateKey(template.value, constants.templates)

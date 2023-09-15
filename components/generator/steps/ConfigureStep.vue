@@ -2,6 +2,8 @@
 import { storeToRefs } from 'pinia'
 import ServerNameSection from '../sections/server/ServerNameSection.vue'
 import ServerVersionSection from '../sections/server/ServerVersionSection.vue'
+import ServerMotdSection from '../sections/server/ServerMotdSection.vue'
+import ServerPlayerCountSection from '../sections/server/ServerPlayerCountSection.vue'
 import { useDefaultStore } from '~/stores/defaults'
 import BackgroundSection from '~/components/generator/sections/BackgroundSection.vue'
 import LogoSection from '~/components/generator/sections/LogoSection.vue'
@@ -17,7 +19,7 @@ import LikeCountSection from '~/components/generator/sections/LikeCountSection.v
 
 const defaults = useDefaultStore()
 
-const { id, platform, template, type, host, port } = storeToRefs(defaults)
+const { id, platform, template, type } = storeToRefs(defaults)
 
 const resource = storeToRefs(defaults).resource
 const author = storeToRefs(defaults).author
@@ -125,6 +127,16 @@ const configureItems = [
     key: 'serverVersion',
     label: 'Server Version',
     description: 'Change the server version of your banner.'
+  },
+  {
+    key: 'serverMotd',
+    label: 'MOTD',
+    description: 'Change the MOTD of your banner.'
+  },
+  {
+    key: 'serverPlayerCount',
+    label: 'Player Count',
+    description: 'Change the player count of your banner.'
   }
 ]
 
@@ -258,7 +270,9 @@ const serverSectionConfig = [
   'background',
   'serverLogo',
   'serverName',
-  'serverVersion'
+  'serverVersion',
+  'serverMotd',
+  'serverPlayerCount'
 ]
 
 const filteredItems = computed(() => {
@@ -354,6 +368,12 @@ export default {
         </div>
         <div v-if="item.key === 'serverVersion'" class="space-y-3">
           <ServerVersionSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverMotd'" class="space-y-3">
+          <ServerMotdSection :label="item.label" :description="item.description" />
+        </div>
+        <div v-if="item.key === 'serverPlayerCount'" class="space-y-3">
+          <ServerPlayerCountSection :label="item.label" :description="item.description" />
         </div>
       </div>
     </template>
