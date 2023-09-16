@@ -2,6 +2,10 @@
 import { useConstantStore } from './stores/constants'
 import { useDefaultStore } from './stores/defaults'
 
+defineOgImageScreenshot({
+  colorScheme: 'dark'
+})
+
 const constants = useConstantStore()
 const defaults = useDefaultStore()
 
