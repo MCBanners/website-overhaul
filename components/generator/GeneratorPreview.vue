@@ -1,9 +1,22 @@
 <script setup lang="ts">
 import { useDefaultStore } from '~/stores/defaults'
+import GlobalSettings from '~/components/generator/global/Settings.vue'
 
 defineProps({
   label: String,
   description: String
+})
+
+const isOpen = ref(false)
+const { metaSymbol } = useShortcuts()
+
+defineShortcuts({
+  meta_g: {
+    usingInput: true,
+    handler: () => {
+      isOpen.value = !isOpen.value
+    }
+  }
 })
 
 const defaults = useDefaultStore()
@@ -21,9 +34,29 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
       >
         Preview
       </h3>
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 text-center">
-        This is how your banner will look.
-      </p>
+      <div class="flex flex-row justify-center">
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 text-center underline" @click="isOpen = true">
+          Global Settings
+        </p>
+        <p class="ml-2">
+          ⃓
+        </p>
+        <p class="ml-2">
+          <UKbd>{{ metaSymbol }} + G</UKbd>
+        </p>
+      </div>
+      <UModal v-model="isOpen" :overlay="false">
+        <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+          <template #header>
+            <h3
+              class="text-base font-semibold leading-6 text-gray-900 dark:text-white text-center"
+            >
+              Global Font Family + Bold Controls
+            </h3>
+          </template>
+          <GlobalSettings />
+        </UCard>
+      </UModal>
     </template>
     <img
       :alt="label"
