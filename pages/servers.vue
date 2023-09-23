@@ -82,7 +82,7 @@ async function onSubmit (form: any) {
 }
 </script>
 <template>
-  <UTabs :items="items" class="w-1/2 mx-auto mt-12" :model-value="index">
+  <UTabs :items="items" class="w-5/6 2xl:w-1/2 mx-auto mt-12" :model-value="index">
     <template #item="{ item }">
       <UCard
         @submit.prevent="
