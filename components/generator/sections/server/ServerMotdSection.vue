@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <UCard class="ml-4">
+  <UCard class="w-full">
     <template #header>
       <div class="text-center">
         <h3
