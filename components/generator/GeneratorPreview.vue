@@ -8,16 +8,6 @@ defineProps({
 })
 
 const isOpen = ref(false)
-const { metaSymbol } = useShortcuts()
-
-defineShortcuts({
-  meta_g: {
-    usingInput: true,
-    handler: () => {
-      isOpen.value = !isOpen.value
-    }
-  }
-})
 
 const defaults = useDefaultStore()
 
@@ -34,17 +24,9 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
       >
         Preview
       </h3>
-      <div class="flex flex-row justify-center">
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 text-center underline" @click="isOpen = true">
-          Global Settings
-        </p>
-        <p class="ml-2">
-          ⃓
-        </p>
-        <p class="ml-2">
-          <UKbd>{{ metaSymbol }} + G</UKbd>
-        </p>
-      </div>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 text-center underline" @click="isOpen = true">
+        Global Settings
+      </p>
       <UModal v-model="isOpen" :overlay="false">
         <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
           <template #header>
