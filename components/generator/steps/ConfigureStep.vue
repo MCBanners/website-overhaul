@@ -305,13 +305,7 @@ export default {
   >
     <template #item="{ item }">
       <div class="flex flex-col">
-        <GeneratorPreview
-          :url="computedImageUrl"
-          :label="item.label"
-          :request-id="id.value"
-          :template-key="template.value"
-          :logo-size="logo.size"
-        />
+        <GeneratorPreview />
         <div v-if="item.key === 'background'" class="space-y-3">
           <BackgroundSection
             :label="item.label"
