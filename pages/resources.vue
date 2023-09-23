@@ -33,6 +33,11 @@ const platforms = [
     type: 'SPIGOT_RESOURCE'
   },
   {
+    key: 'hangar',
+    value: 'Hangar',
+    type: 'HANGAR_RESOURCE'
+  },
+  {
     key: 'ore',
     value: 'Sponge',
     type: 'SPONGE_RESOURCE'
@@ -56,11 +61,6 @@ const platforms = [
     key: 'polymart',
     value: 'Polymart',
     type: 'POLYMART_RESOURCE'
-  },
-  {
-    key: 'hangar',
-    value: 'Hangar',
-    type: 'HANGAR_RESOURCE'
   }
 ]
 
