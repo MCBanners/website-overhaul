@@ -304,7 +304,7 @@ export default {
     }"
   >
     <template #item="{ item }">
-      <div class="flex flex-row">
+      <div class="flex flex-col">
         <GeneratorPreview
           :url="computedImageUrl"
           :label="item.label"

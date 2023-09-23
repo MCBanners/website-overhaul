@@ -17,7 +17,7 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
 </script>
 
 <template>
-  <UCard class="w-1/3">
+  <UCard class="w-full mb-4">
     <template #header>
       <h3
         class="text-base font-semibold leading-6 text-gray-900 dark:text-white text-center"
@@ -40,12 +40,14 @@ const computedImageUrl: ComputedRef<string> = computed(() => {
         </UCard>
       </UModal>
     </template>
-    <img
-      :alt="label"
-      :src="computedImageUrl"
-      width="300"
-      height="100"
-      class="rounded-lg"
-    >
+    <div class="flex items-center justify-center">
+      <img
+        :alt="label"
+        :src="computedImageUrl"
+        width="300"
+        height="100"
+        class="rounded-lg"
+      >
+    </div>
   </UCard>
 </template>

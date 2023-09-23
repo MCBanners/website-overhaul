@@ -22,13 +22,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row mb-4 w-full">
+  <div class="flex justify-center space-x-4">
     <FormInput
       v-model="resource_count.x"
       name="xoffset"
       label="X Offset"
       type="number"
-      class="w-1/6 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
     <FormInput
@@ -36,7 +36,7 @@ export default {
       name="yoffset"
       label="Y Offset"
       type="number"
-      class="w-1/6 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
     <FormInput
@@ -44,14 +44,12 @@ export default {
       name="fontsize"
       label="Font Size"
       type="number"
-      class="w-1/6 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
     <UFormGroup label="Bold" name="bold">
       <UToggle v-model="resource_count.font_bold" />
     </UFormGroup>
-  </div>
-  <div class="flex flex-row space-x-4">
     <UFormGroup label="Text Alignment" name="alignment">
       <USelect
         v-model="resource_count.text_align"

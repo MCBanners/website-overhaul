@@ -17,13 +17,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex justify-center space-x-4">
     <FormInput
       v-model="stars.x"
       name="starXOffset"
       label="X Offset"
       type="number"
-      class="w-1/4 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
     <FormInput
@@ -31,7 +31,7 @@ export default {
       name="starYOffset"
       label="Y Offset"
       type="number"
-      class="w-1/4 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
     <FormInput
@@ -39,7 +39,7 @@ export default {
       name="starGap"
       label="Gap"
       type="number"
-      class="w-1/4 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
   </div>

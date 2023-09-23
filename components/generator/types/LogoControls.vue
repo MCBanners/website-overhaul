@@ -32,13 +32,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex justify-center space-x-4">
     <FormInput
       v-model="logo.size"
       name="logoSize"
       label="Size"
       type="number"
-      class="w-1/3 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
     <FormInput
@@ -46,7 +46,7 @@ export default {
       name="logoXOffset"
       label="X Offset"
       type="number"
-      class="w-1/3 mr-4"
+      class="w-1/12"
       trail-text="px"
     />
   </div>
